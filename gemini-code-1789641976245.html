@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SSW Accommodation 3D AI Learning App</title>
+    <style>
+        :root {
+            /* 3D GAMIFIED LIME GREEN EYE-COMFORTABLE DARK THEME */
+            --bg-main: #0B1912;
+            --bg-card: #132A1D;
+            --bg-card-sub: #07130C;
+            --border-soft: #22543D;
+            --text-title: #F0FDF4;
+            --text-body: #DCFCE7;
+            --text-muted: #86EFAC;
+            
+            --brand-lime: #22C55E;
+            --brand-green-dark: #15803D;
+            --accent-warm: #E07A5F;
+            --accent-purple: #818CF8;
+            --accent-green: #34D399;
+            
+            --jp-color: #38BDF8;
+            --en-color: #4ADE80;
+            --si-color: #FBBF24;
+            --bottom-nav-height: 65px;
+        }
+
+        [data-theme="light"] {
+            /* 3D LIME SOFT LIGHT THEME */
+            --bg-main: #F2FBF4;
+            --bg-card: #FFFFFF;
+            --bg-card-sub: #E6F7ED;
+            --border-soft: #BBF7D0;
+            --text-title: #052E16;
+            --text-body: #166534;
+            --text-muted: #15803D;
+            
+            --brand-lime: #16A34A;
+            --brand-green-dark: #166534;
+            --accent-warm: #E07A5F;
+            --accent-purple: #6366F1;
+            --accent-green: #10B981;
+            
+            --jp-color: #0284C7;
+            --en-color: #059669;
+            --si-color: #D97706;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            min-height: 100vh;
+            padding-bottom: calc(var(--bottom-nav-height) + 20px);
+            line-height: 1.5;
+            letter-spacing: 0.2px;
+        }
+
+        .app-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            padding: 12px 16px 90px 16px;
+        }
+
+        /* Live Clock Status Bar */
+        .live-clock-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--brand-lime);
+            background: var(--bg-card-sub);
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-soft);
+        }
+
+        /* Top Bar Header */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-title);
+            margin-bottom: 14px;
+        }
+
+        .user-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            padding: 6px 14px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .sudu-nona-avatar-svg {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #FFE4E6;
+            border: 2px solid var(--brand-lime);
+        }
+
+        .user-name {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--text-title);
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            color: var(--text-title);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-soft);
+            background: var(--bg-card);
+            color: var(--text-title);
+            outline: none;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+        }
+
+        /* 3D LIME HERO BANNER CARD */
+        .lime-hero-card {
+            background: linear-gradient(135deg, var(--brand-green-dark) 0%, #15803D 50%, #052E16 100%);
+            border-radius: 22px;
+            padding: 18px;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.25);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--brand-lime);
+        }
+
+        .lime-hero-content {
+            max-width: 65%;
+            z-index: 2;
+        }
+
+        .lime-hero-content h3 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: #DCFCE7;
+        }
+
+        .lime-hero-content p {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .btn-action-round {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--brand-lime);
+            color: #052E16;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 10px 6px;
+            text-align: center;
+        }
+
+        .stat-val { font-size: 0.95rem; font-weight: 800; color: var(--text-title); }
+        .stat-lbl { font-size: 0.62rem; color: var(--text-muted); margin-top: 2px; }
+
+        .xp-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: var(--border-soft);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+
+        .xp-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand-lime), var(--accent-green));
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .section-header-white {
+            color: var(--text-title);
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .tile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            min-height: 85px;
+        }
+
+        .tile-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+        .tile-count { font-size: 0.65rem; background: rgba(34, 197, 94, 0.15); color: var(--brand-lime); padding: 2px 6px; border-radius: 8px; font-weight: 700; }
+        .tile-title { font-size: 0.78rem; font-weight: 700; color: var(--text-title); line-height: 1.2; }
+
+        .content-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+        }
+
+        .vocab-word-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .vocab-jp-row { display: flex; align-items: baseline; gap: 8px; }
+        .vocab-kanji { font-size: 1.1rem; font-weight: 800; color: var(--jp-color); }
+        .vocab-kana { font-size: 0.8rem; color: var(--text-muted); }
+        .vocab-romaji { font-size: 0.72rem; color: var(--accent-purple); font-weight: 600; }
+        .vocab-meanings { display: flex; flex-direction: column; gap: 2px; font-size: 0.82rem; padding-top: 4px; border-top: 1px dashed var(--border-soft); }
+
+        .trilingual-block {
+            background: var(--bg-card-sub);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--brand-lime);
+        }
+
+        .lang-text { font-size: 0.82rem; line-height: 1.4; margin-bottom: 4px; }
+        .lang-text.jp { color: var(--jp-color); font-weight: 600; }
+        .lang-text.en { color: var(--en-color); }
+        .lang-text.si { color: var(--si-color); }
+
+        .badge { display: inline-block; font-size: 0.62rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; margin-right: 6px; }
+        .badge-jp { background: rgba(56, 189, 248, 0.15); color: var(--jp-color); }
+        .badge-en { background: rgba(74, 222, 128, 0.15); color: var(--en-color); }
+        .badge-si { background: rgba(251, 191, 36, 0.15); color: var(--si-color); }
+
+        .qa-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed var(--border-soft); }
+        .qa-num { background: var(--brand-lime); color: #052E16; font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 8px; }
+
+        .action-btn { background: none; border: 1px solid var(--border-soft); color: var(--text-muted); padding: 4px 8px; border-radius: 8px; font-size: 0.7rem; cursor: pointer; }
+        .action-btn.done { background: var(--accent-green); color: #000; font-weight: 700; }
+        .action-btn.star { background: var(--si-color); color: #000; font-weight: 700; }
+
+        /* COMPACT AI SENSEI MODE TILES */
+        .sensei-tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .sensei-tile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            height: 38px;
+        }
+
+        .sensei-tile-card.active {
+            border-color: var(--brand-lime);
+            background: rgba(34, 197, 94, 0.18);
+        }
+
+        .tile-icon-svg {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            min-height: 18px;
+            flex-shrink: 0;
+        }
+
+        .sensei-tile-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-title);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .live-voice-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .voice-avatar-wrap {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 10px auto;
+        }
+
+        .voice-pulse-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid var(--brand-lime);
+            animation: pulseWave 1.8s infinite ease-out;
+            opacity: 0;
+        }
+
+        .voice-pulse-ring.active { opacity: 1; }
+
+        @keyframes pulseWave {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .mascot-avatar-lg {
+            width: 100%; height: 100%; border-radius: 50%; background: var(--bg-card-sub); display: flex; align-items: center; justify-content: center;
+        }
+
+        .call-status-text { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin-bottom: 10px; }
+
+        .call-transcript-box {
+            background: var(--bg-card-sub);
+            border: 1px solid var(--border-soft);
+            color: var(--text-body);
+            border-radius: 12px;
+            padding: 10px 12px;
+            min-height: 75px;
+            text-align: left;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .suggested-answer-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid var(--si-color);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: left;
+            margin-bottom: 12px;
+            font-size: 0.78rem;
+        }
+
+        .mic-btn-large {
+            width: 56px; height: 56px; border-radius: 50%; background: var(--brand-lime); border: none; color: #052E16; font-size: 1.4rem; cursor: pointer; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-weight: 800;
+        }
+
+        .mic-btn-large.listening { background: var(--accent-green); color: #000; }
+
+        .chat-input-row { display: flex; gap: 6px; margin-top: 10px; }
+        .chat-input-row input { flex: 1; padding: 8px 12px; border-radius: 16px; border: 1px solid var(--border-soft); background: var(--bg-card-sub); color: var(--text-title); outline: none; font-size: 0.8rem; }
+
+        /* MODAL OVERLAY */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .modal-box { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: 20px; padding: 20px; width: 100%; max-width: 360px; color: var(--text-title); }
+        .modal-box h3 { margin-bottom: 14px; font-size: 1.05rem; color: var(--si-color); }
+        .modal-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-soft); font-size: 0.85rem; }
+        .btn-reset { background: #EF4444; color: #FFF; border: none; padding: 8px 14px; border-radius: 10px; font-weight: 700; font-size: 0.8rem; cursor: pointer; width: 100%; margin-top: 14px; }
+
+        /* FLOATING GREEN PILL NAVIGATION BAR */
+        .floating-nav {
+            position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 440px; height: 60px; background: var(--bg-card); border: 1px solid var(--brand-lime); border-radius: 30px; display: flex; justify-content: space-around; align-items: center; padding: 0 10px; z-index: 1000; box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 0.65rem; font-weight: 600; cursor: pointer; width: 55px; gap: 2px; }
+        .nav-btn.active { color: var(--brand-lime); }
+        .nav-btn-center { width: 48px; height: 48px; border-radius: 50%; background: var(--brand-lime); color: #052E16; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-main); margin-top: -20px; cursor: pointer; font-weight: 800; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        
+        <!-- LIVE DATE & TIME BAR -->
+        <div class="live-clock-bar">
+            <span>📅 <span id="liveDateText">Thu, Sep 17</span></span>
+            <span>⏰ <span id="liveTimeText">04:09 PM</span></span>
+        </div>
+
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <div class="user-pill">
+                <!-- SUDU NONA CUSTOM 3D GIRL AVATAR SVG (Image image_610a42.png inspired) -->
+                <svg class="sudu-nona-avatar-svg" viewBox="0 0 100 100">
+                    <!-- Base skin -->
+                    <circle cx="50" cy="50" r="42" fill="#FED7AA"/>
+                    <!-- Twin pigtails (Double Ponytails) -->
+                    <path d="M 15 28 C 5 15 15 5 28 20 C 35 30 25 50 15 28 Z" fill="#1E1B4B"/>
+                    <path d="M 85 28 C 95 15 85 5 72 20 C 65 30 75 50 85 28 Z" fill="#1E1B4B"/>
+                    <!-- Wavy Black Hair -->
+                    <path d="M 22 45 C 20 20 80 20 78 45 C 70 25 30 25 22 45 Z" fill="#1E1B4B"/>
+                    <!-- Large Anime Eyes -->
+                    <ellipse cx="38" cy="46" rx="5" ry="7" fill="#0F172A"/>
+                    <ellipse cx="62" cy="46" rx="5" ry="7" fill="#0F172A"/>
+                    <circle cx="39" cy="44" r="2" fill="#FFF"/>
+                    <circle cx="63" cy="44" r="2" fill="#FFF"/>
+                    <!-- Rosy Cheeks -->
+                    <circle cx="30" cy="56" r="6" fill="#FB7185" opacity="0.6"/>
+                    <circle cx="70" cy="56" r="6" fill="#FB7185" opacity="0.6"/>
+                    <!-- Smile -->
+                    <path d="M 45 60 Q 50 66 55 60" stroke="#9A3412" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                    <!-- Off-shoulder top with hearts -->
+                    <path d="M 28 78 Q 50 85 72 78 L 80 100 L 20 100 Z" fill="#1E1B4B"/>
+                    <!-- Heart pattern -->
+                    <circle cx="40" cy="88" r="2" fill="#F43F5E"/>
+                    <circle cx="60" cy="88" r="2" fill="#F43F5E"/>
+                </svg>
+                <div class="user-name">Hi, Sudu Nona</div>
+            </div>
+            <div class="top-actions">
+                <button class="icon-btn" onclick="toggleTheme()">🌓</button>
+                <button class="icon-btn" onclick="openSettings()">⚙️</button>
+            </div>
+        </div>
+
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search keywords (JP / EN / SI)..." oninput="globalSearch()">
+
+        <!-- SCREEN 1: DASHBOARD -->
+        <div id="dashScreen">
+            <div class="lime-hero-card">
+                <div class="lime-hero-content">
+                    <h3>Learn More Smarter</h3>
+                    <p>Master SSW Accommodation chapters & 360 terms with AI.</p>
+                    <button class="btn-action-round" onclick="switchTab('chapters')">→</button>
+                </div>
+                <!-- 3D Rocket Vector SVG -->
+                <svg width="85" height="85" viewBox="0 0 100 100">
+                    <path d="M 50 10 C 65 30 75 55 70 80 L 30 80 C 25 55 35 30 50 10 Z" fill="#22C55E"/>
+                    <circle cx="50" cy="45" r="12" fill="#FFFFFF"/>
+                    <circle cx="50" cy="45" r="8" fill="#38BDF8"/>
+                    <path d="M 30 65 L 15 85 L 30 80 Z" fill="#818CF8"/>
+                    <path d="M 70 65 L 85 85 L 70 80 Z" fill="#818CF8"/>
+                    <polygon points="40,80 50,98 60,80" fill="#FBBF24"/>
+                </svg>
+            </div>
+
+            <div class="hero-card" style="margin-bottom:14px; padding:14px;">
+                <h3>
+                    <span>Level: <span id="levelTitle">研修生 (Trainee)</span></span>
+                    <span id="streakVal">🔥 1 Day</span>
+                </h3>
+                <p style="font-size:0.75rem; color:var(--text-muted);">XP Progress: <span id="xpVal">0</span> / <span id="nextXpVal">100</span> XP</p>
+                <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xpBarFill"></div></div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box"><div class="stat-val" id="progressPct">0%</div><div class="stat-lbl">Progress</div></div>
+                <div class="stat-box"><div class="stat-val" id="doneQA">0/69</div><div class="stat-lbl">Q&A Done</div></div>
+                <div class="stat-box"><div class="stat-val" id="vocabMasteredCount">0/360</div><div class="stat-lbl">Vocab Done</div></div>
+                <div class="stat-box"><div class="stat-val" id="starQA">0</div><div class="stat-lbl">Starred</div></div>
+            </div>
+
+            <div class="section-header-white">
+                <span>🎴 Vocab Categories (単語カテゴリー)</span>
+                <span style="font-size:0.75rem; color:var(--brand-lime); cursor:pointer;" onclick="switchTab('vocab')">View All (20) →</span>
+            </div>
+            <div class="tiles-grid" id="dashTilesPreview"></div>
+        </div>
+
+        <!-- SCREEN 2: CHAPTERS (1-8) -->
+        <div id="chaptersScreen" class="hidden">
+            <div class="section-header-white">📘 Chapters 1 - 8 (Full Guide)</div>
+            <div id="chaptersContainer"></div>
+        </div>
+
+        <!-- SCREEN 3: QA BANK (1-69) -->
+        <div id="qaScreen" class="hidden">
+            <div class="section-header-white">❓ Exam Q&A Bank (All 69)</div>
+            <div id="qaContainer"></div>
+        </div>
+
+        <!-- SCREEN 4: VOCABULARY TILES & CARDS -->
+        <div id="vocabScreen" class="hidden">
+            <div id="vocabCategoriesView">
+                <div class="section-header-white">🎴 20 Hotel Vocab Categories (360 Words)</div>
+                <div class="tiles-grid" id="vocabCategoriesTiles"></div>
+            </div>
+            <div id="vocabPracticeCardsView" class="hidden">
+                <div class="section-header-white">
+                    <button class="action-btn" onclick="backToCategories()">← Back to Categories</button>
+                    <span id="selectedCategoryTitle" style="font-size:0.85rem; color:var(--si-color);">Category</span>
+                </div>
+                <div id="vocabCardsContainer"></div>
+            </div>
+        </div>
+
+        <!-- SCREEN 5: NATIVE CONVERSATIONS -->
+        <div id="convScreen" class="hidden">
+            <div class="section-header-white">🗣️ Native Japanese Hotel Dialogues</div>
+            <div id="convContainer"></div>
+        </div>
+
+        <!-- SCREEN 6: AI HOTEL SENSEI (MODERN GREEN ROBOT SENSEI AVATAR) -->
+        <div id="aiScreen" class="hidden">
+            <div class="section-header-white">🤖 AI Hotel Sensei Call & Practice</div>
+            
+            <!-- Compact 3-Column Training Mode Tiles -->
+            <div class="sensei-tiles-grid">
+                <div class="sensei-tile-card active" onclick="setSenseiMode('customer', this)">
+                    <svg class="tile-icon-svg" viewBox="0 0 24 24"><path fill="var(--accent-purple)" d="M19 7h-8v6h8V7zm2-2H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z"/></svg>
+                    <span class="sensei-tile-title">Customer</span>
+                </div>
+                <div class="sensei-tile-card" onclick="setSenseiMode('manager', this)">
+                    <svg class="tile-icon-svg" viewBox="0 0 24 24"><path fill="var(--si-color)" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <span class="sensei-tile-title">Manager</span>
+                </div>
+                <div class="sensei-tile-card" onclick="setSenseiMode('coworker', this)">
+                    <svg class="tile-icon-svg" viewBox="0 0 24 24"><path fill="var(--en-color)" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    <span class="sensei-tile-title">Coworker</span>
+                </div>
+                <div class="sensei-tile-card" onclick="setSenseiMode('phone', this)">
+                    <svg class="tile-icon-svg" viewBox="0 0 24 24"><path fill="var(--jp-color)" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-8.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span class="sensei-tile-title">Telephone</span>
+                </div>
+                <div class="sensei-tile-card" onclick="setSenseiMode('emergency', this)">
+                    <svg class="tile-icon-svg" viewBox="0 0 24 24"><path fill="var(--accent-warm)" d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V10h2v4z"/></svg>
+                    <span class="sensei-tile-title">Emergency</span>
+                </div>
+                <div class="sensei-tile-card" onclick="setSenseiMode('vocab', this)">
+                    <svg class="tile-icon-svg" viewBox="0 0 24 24"><path fill="var(--si-color)" d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                    <span class="sensei-tile-title">20 Vocab Topics</span>
+                </div>
+            </div>
+
+            <!-- Sub-Tiles Grid for 20 Vocab Topics when Vocab Mode is Selected -->
+            <div id="senseiVocabSubTilesContainer" class="tiles-grid hidden" style="margin-bottom:12px;"></div>
+
+            <div class="live-voice-container">
+                <div class="voice-avatar-wrap">
+                    <div class="voice-pulse-ring" id="pulseRing"></div>
+                    <div class="mascot-avatar-lg">
+                        <!-- MODERN 3D GREEN AI ROBOT AVATAR SVG (Image 3c10010beba97f183c4b39021002d160.webp inspired) -->
+                        <svg width="75" height="75" viewBox="0 0 100 100">
+                            <!-- Green Sphere Head -->
+                            <circle cx="50" cy="50" r="40" fill="#22C55E"/>
+                            <!-- White Glossy Screen Visor -->
+                            <ellipse cx="50" cy="48" rx="28" ry="20" fill="#FFFFFF"/>
+                            <!-- Happy Glowing Eyes -->
+                            <ellipse cx="40" cy="46" rx="4" ry="6" fill="#15803D"/>
+                            <ellipse cx="60" cy="46" rx="4" ry="6" fill="#15803D"/>
+                            <!-- Cute Mouth -->
+                            <path d="M 44 54 Q 50 60 56 54" stroke="#15803D" stroke-width="3" stroke-linecap="round" fill="none"/>
+                            <!-- White Headphones -->
+                            <rect x="5" y="40" width="10" height="20" rx="5" fill="#FFFFFF"/>
+                            <rect x="85" y="40" width="10" height="20" rx="5" fill="#FFFFFF"/>
+                            <path d="M 10 40 Q 50 15 90 40" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="call-status-text" id="callStatus">AI Sensei Live Call Ready</div>
+
+                <!-- Live AI Question & Dialogue Transcript -->
+                <div class="call-transcript-box" id="transcriptBox">
+                    <div style="color: var(--jp-color); font-weight: 700;">AI Sensei Question:</div>
+                    <div id="aiQuestionText">Loading scenario...</div>
+                </div>
+
+                <!-- On-Screen Suggested Answer / Hint Box -->
+                <div id="suggestedAnswerBox" class="suggested-answer-box hidden">
+                    <div style="color:var(--si-color); font-weight:700; margin-bottom:4px;">💡 Suggested Keigo Response (පිළිතුරු ඉඟිය):</div>
+                    <div id="suggestJp" style="color:var(--jp-color); font-weight:600;"></div>
+                    <div id="suggestEn" style="color:var(--en-color); font-size:0.75rem;"></div>
+                    <div id="suggestSi" style="color:var(--si-color); font-size:0.75rem;"></div>
+                </div>
+
+                <div style="display:flex; justify-content:center; gap:8px; margin-bottom:12px;">
+                    <button class="action-btn" style="background:var(--bg-card-sub);" onclick="toggleSuggestedAnswer()">💡 Show/Hide Hint</button>
+                    <button class="action-btn" style="background:var(--brand-lime); color:#052E16; font-weight:800;" onclick="generateSenseiQuestion()">➡️ Next Question</button>
+                </div>
+
+                <button class="mic-btn-large" id="micBtn" onclick="toggleVoiceLive()">🎙️</button>
+
+                <div class="chat-input-row">
+                    <input type="text" id="senseiTextInput" placeholder="Type response in Japanese/English..." onkeypress="if(event.key==='Enter') submitSenseiAnswer()">
+                    <button class="action-btn" style="background:var(--accent-green); color:#000; font-weight:700;" onclick="submitSenseiAnswer()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SETTINGS MODAL -->
+        <div class="modal-overlay hidden" id="settingsModal">
+            <div class="modal-box">
+                <h3>⚙️ Settings & Options</h3>
+                <div class="modal-row">
+                    <span>Theme Mode</span>
+                    <button class="action-btn" onclick="toggleTheme()">Switch Light/Dark</button>
+                </div>
+                <div class="modal-row">
+                    <span>App Version</span>
+                    <span style="color:var(--text-muted)">v6.0 Green 3D (2026)</span>
+                </div>
+                <button class="btn-reset" onclick="promptResetData()">⚠️ Reset All Data (PIN Required)</button>
+                <button class="action-btn" style="width:100%; margin-top:10px;" onclick="closeSettings()">Close</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FLOATING GREEN PILL NAVIGATION BAR -->
+    <nav class="floating-nav">
+        <button class="nav-btn active" onclick="switchTab('dash', this)">
+            <span style="font-size: 1.1rem;">🏠</span> Home
+        </button>
+        <button class="nav-btn" onclick="switchTab('chapters', this)">
+            <span style="font-size: 1.1rem;">📘</span> Guide
+        </button>
+        <button class="nav-btn-center" onclick="switchTab('ai', this)">🤖</button>
+        <button class="nav-btn" onclick="switchTab('qa', this)">
+            <span style="font-size: 1.1rem;">❓</span> Q&A
+        </button>
+        <button class="nav-btn" onclick="switchTab('vocab', this)">
+            <span style="font-size: 1.1rem;">🎴</span> Vocab
+        </button>
+    </nav>
+
+    <script>
+        // LIVE DIGITAL CLOCK UPDATE
+        function updateClock() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            
+            const dateEl = document.getElementById('liveDateText');
+            const timeEl = document.getElementById('liveTimeText');
+            if(dateEl) dateEl.innerText = dateStr;
+            if(timeEl) timeEl.innerText = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // MASTER CHAPTERS DATA (PRESERVED IN FULL)[cite: 1, 2]
+        const chaptersData = [
+            { id: 1, title: "Chapter 1: Overview of Accommodation Industry", content: [{ jp: "宿泊施設(ryokan, hoteru, kapuseru hoteru, gesuto hausu nado) to hoteru sangyō no gaiyō, omotenashi no seishin.", en: "Introduction to accommodation types (Ryokan, hotels, capsule hotels, guest houses), characteristics of Japanese accommodation industry, tourism trends, customer profiles, and 'Omotenashi' culture.", si: "නවාතැන් වර්ග (රියොකන්, හෝටල්, කැප්සියුල් හෝටල්, ගෙස්ට් හවුස්), ජපන් නවාතැන් කර්මාන්තයේ විශේෂ ලක්ෂණ, සංචාරක ප්‍රවණතා, පාරිභෝගික පැතිකඩ සහ 'ඔමොතෙනාෂි' සංස්කෘතිය." }] },
+            { id: 2, title: "Chapter 2: Accommodation Facilities & Room Types", content: [{ jp: "和室(washitsu), 洋室(yōshitsu), shinguru, tsuin, daburu rūmu, ameniti, manshitsu, uōku-in, shisetsu to sebitsu.", en: "Japanese style (Washitsu) and Western style (Yoshoku) rooms, Single/Twin/Double rooms, amenities, Manshitsu (full booking), and Walk-in customers.", si: "ජපන් (Washitsu) සහ බටහිර (Yoshoku) කාමර වර්ග, සිංගල්/ට්වින්/ඩබල් කාමර, ඇමෙනිටීස්, මන්ෂිත්සු (කාමර පිරී යාම) සහ වෝක්-ඉන් (Walk-in) සංකල්ප." }] },
+            { id: 3, title: "Chapter 3: Reservation & Front Desk Operations", content: [{ jp: "予約 (yoyaku), チェックイン (chekku-in - 15:00), チェックアウト (chekku-out - 10:00), フロント業務, uōku-in, dairekuto bukkingu.", en: "Reservation procedures, Check-in (15:00) / Check-out (10:00) processes, Direct Booking, and handing room keys with both hands facing front.", si: "කාමර වෙන්කිරීමේ ක්‍රියා පටිපාටි, චෙක්-ඉන් (15:00) සහ චෙක්-අවුට් (10:00) වේලාවන්, සෘජු වෙන්කිරීම් (Direct Booking), ෆ්‍රන්ට් ඩෙස්ක් ආචාර වචන සහ කාමර යතුරු දෙඅතින්ම ඉදිරිපසට මුහුණලා පිළිගැන්වීම." }] },
+            { id: 4, title: "Chapter 4: Housekeeping & Cleaning Procedures", content: [{ jp: "ベッドメイキング, 忘れ物管理, 清掃手順, eisei to anzen kanri kijun.", en: "Wrinkle-free bed-making, securing Lost & Found items (recording date/room number), cleaning protocols, handling amenities, and hygiene & safety standards.", si: "රැළි නොමැතිව ඇඳ ඇතිරිලි සකස් කිරීම (Bed-making), හමුවන අහිමි වූ දෑ (Lost & Found) දිනය හා කාමර අංකය ලියා සුරක්ෂිතව තැබීම, පිරිසිදු කිරීමේ ක්‍රියා පටිපාටි, සහ සනීපාරක්ෂක ප්‍රමිතීන්." }] },
+            { id: 5, title: "Chapter 5: Guest Services & Customer Interaction", subgroups: [
+                { title: "Key Greetings (あいさつ)", items: [
+                    { jp: "「いらっしゃいませ」(Irasshaimase)", en: "Welcome", si: "සාදරයෙන් පිළිගනිමු / ආයුබෝවන්" },
+                    { jp: "「ありがとうございました」(Arigatō gozaimashita)", en: "Thank you", si: "ස්තූතියි" },
+                    { jp: "「はい、かしこまりました」(Hai, kashikomarimashita)", en: "Yes, certainly", si: "ප්‍රීතියෙන් / එලෙසම කරන්නම්" },
+                    { jp: "「申し訳ございません」(Mōshiwake gozaimasen)", en: "I apologize", si: "කණගාටුයි / සමාවන්න" },
+                    { jp: "「恐れ入りますが、...」(Osoreirimasu ga)", en: "I'm sorry, but...", si: "කණගාටුයි, නමුත්..." },
+                    { jp: "「お待たせいたしました」(Omatase itashimashita)", en: "Thank you for waiting", si: "ප්‍රමාද වීම ගැන කණගාටුයි" },
+                    { jp: "「少々お待ちください」(Shōshō omachi kudasai)", en: "Please wait a moment", si: "ක්ෂණයක් රැඳී සිටින්න" },
+                    { jp: "「失礼します」(Shitsurei shimasu)", en: "Excuse me", si: "සමාවෙන්න / අවසරයි" }
+                ]},
+                { title: "Posture & Bowing (基本姿勢とおじぎ)", items: [
+                    { jp: "基本姿勢 (Kihon Shisei)", en: "Basic correct posture (Straight back, stomach in, hands overlapped below stomach)", si: "මූලික ඉරියව්ව (කොන්ද කෙළින්, අත් උදරයට පහළින් තබා ගැනීම)" },
+                    { jp: "会釈 (Eshaku - 15°)", en: "15° bow used when passing guests in corridors or dining areas", si: "අංශක 15 නැඹුරුව (කොරිඩෝ ආචාරය)" },
+                    { jp: "普通礼 (Futsuurei - 30°)", en: "30° standard bow used for general greetings and customer service", si: "අංශක 30 නැඹුරුව (සාමාන්‍ය පිළිගැනීමේ ආචාරය)" },
+                    { jp: "最敬礼 (Saikeirei - 45°)", en: "45° deep bow used for seeing off departing guests or deep apologies", si: "අංශක 45 නැඹුරුව (සමුදීමේදී හෝ දැඩි ලෙස සමාව ඉල්ලීමේදී)" }
+                ]},
+                { title: "Etiquette & Keigo", items: [
+                    { jp: "尊敬語 (Sonkeigo) / 謙譲語 (Kenjōgo) / 丁寧語 (Teineigo)", en: "Keigo honorific levels: Respectful, Humble, and Polite language", si: "ගෞරවාන්විත (Sonkeigo), නිහතමානී (Kenjogo) සහ කාරුණික (Teineigo) භාෂා විලාස" },
+                    { jp: "ほうれんそう (Horenso)", en: "Reporting (Hokoku), Contact (Renraku), Consultation (Sodan)", si: "වාර්තා කිරීම, සම්බන්ධීකරණය, උපදෙස් ගැනීම" },
+                    { jp: "車いす対応 (Kurumaisu taiō)", en: "Crouch down to talk to wheelchair users at their exact eye level", si: "රෝද පුටු භාවිත කරන්නන්ගේ ඇස් මට්ටමට පහත් වන්න" },
+                    { jp: "電話対応 (Denwa taiō)", en: "Never hang up before the guest does", si: "පාරිභෝගිකයාට පෙර ඇමතුම විසන්ධි නොකරන්න" }
+                ]}
+            ]},
+            { id: 6, title: "Chapter 6: Restaurant Service & Food Etiquette", content: [{ jp: "和食 (Washoku - Ichiju-Sansai: rice left, miso right, seasonal Shun ingredients) & 洋食 (Yoshoku: cutlery outside inwards, food from left, drinks right). Confirm food allergies (Alerugen) to prevent Anaphylactic shock. Terms: Silver, Caster set, Haizen, Sommelier, Halal.", en: "Washoku and Yoshoku serving rules, allergen checks, and specialized hotel terminology.", si: "ජපන්/බටහිර කෑම පිළිගැන්වීමේ රීති, අසාත්මිකතා පරීක්ෂාව, සහ විශේෂිත වචන මාලාව." }] },
+            { id: 7, title: "Chapter 7: Cultural Awareness & Communication", content: [{ jp: "異文化理解とコミュニケーション (Ibunka rikai to komyunikēshon).", en: "Understanding cultural differences in guest behavior, politeness, formal language usage, and clear communication.", si: "විදේශික අමුත්තන්ගේ සංස්කෘතික වෙනස්කම් තේරුම් ගැනීම සහ කාරුණිකව සන්නිවේදනය කිරීම." }] },
+            { id: 8, title: "Chapter 8: Safety, Emergency Procedures & Hygiene", content: [{ jp: "非常口, 119番, 地震時の対応 (エレベーター禁止・非常階段), 衛生管理 (うがい・手洗い・身だしなみ), SDGs (節電・節水).", en: "Emergency exit signs (非常口), call 119, never use elevators during earthquake (use stairs). Daily 30s handwashing/gargling. Saving energy (SDGs).", si: "119 ඇමතීම, කොළ පාට හදිසි දොරටු, භූමිකම්පාවකදී විදුලි පඩිපෙළ තහනම්. දෛනික සනීපාරක්ෂාව සහ විදුලිය/ජලය අරපිරිමැස්ම (SDGs)." }] }
+        ];
+
+        // MASTER QA DATA (FULL 69 QUESTIONS PRESERVED)[cite: 3]
+        const qaData = [
+            { id: 1, q_jp: "じしんがおきたとき、すたっふがさいしょにするべきことはなんですか。", q_en: "What should staff do first during an earthquake?", q_si: "භූමිකම්පාවක් ඇති වූ සැනින්, සේවකයන් මුලින්ම කළ යුත්තේ කුමක්ද?", a_jp: "おきゃくさまのあんぜんをかくほし、つくえのしたなどにかくれるようつたえます。", a_en: "Ensure guest safety and guide them under tables.", a_si: "පාරිභෝගිකයින්ගේ ආරක්ෂාව තහවුරු කර, මේසයක් යටට වී ඉන්නා ලෙස දැනුම් දීම." },
+            { id: 2, q_jp: "くるまいすのおきゃくさまをあんないするとき、どのようにしますか。", q_en: "How to guide a guest in a wheelchair?", q_si: "රෝද පුටුවක සිටින පාරිභෝගිකයෙකුට මඟ පෙන්වීමේදී කෙසේ ක්‍රියා කළ යුතුද?", a_jp: "おきゃくさまのはやさにあわせて、だんさやえれべーたーのときにこえをかけます。", a_en: "Match their speed, warn at steps/elevators.", a_si: "පාරිභෝගිකයාගේ වේගයට අනුව ගමන් කරමින්, පඩි පෙළවල් හෝ විදුලි පඩිපෙළවල් අසලදී කල්තියා දැනුම් දීම." },
+            { id: 3, q_jp: "ちぇっくあうとはどういうことですか。", q_en: "What is Check-out?", q_si: "Check-out කිරීම යනු කුමක්ද?", a_jp: "ほてるのへやをでるときに、かぎをかえしてかいけいをすることです。", a_en: "Return the key and settle the payment when leaving the hotel room.", a_si: "හෝටල් කාමරයෙන් පිටවීමේදී, යතුර භාර දී ගෙවීම් කටයුතු සිදු කිරීමයි." },
+            { id: 4, q_jp: "えいせいかんりでただしいものはどれですか。", q_en: "What is correct for hygiene management?", q_si: "සනීපාරක්ෂක කළමනාකරණය සම්බන්ධයෙන් නිවැරදි ප්‍රකාශය කුමක්ද?", a_jp: "ちょうりばやきゃくしつでは、かみをまとめて、つめをみじかくきります。", a_en: "In kitchens/guest rooms, tie hair neatly and keep nails short.", a_si: "කුස්සියේදී හෝ කාමර තුළදී, කොණ්ඩය පිළිවෙළකට බැඳ නියපොතු කෙටියෙන් කපා තිබිය යුතුය." },
+            { id: 5, q_jp: "にほんてきなちょうしょくによくあるものはなんですか。", q_en: "What is common in a traditional Japanese breakfast?", q_si: "සාම්ප්‍රදායික ජපන් උදෑසන ආහාර වේලක සාමාන්‍යයෙන් අඩංගු වන්නේ මොනවාද?", a_jp: "ごはん、みそしる、やきざかななどです。", a_en: "Rice, miso soup, grilled fish, etc.", a_si: "බත්, මිසෝ සුප් සහ පුලුස්සන ලද මාළු වැනි දෑ වේ." },
+            { id: 6, q_jp: "うぇぶさいとのくちこみにどのようにたいおうしますか。", q_en: "How to respond to website reviews?", q_si: "වෙබ් අඩවියේ ඇති පාරිභෝගික ප්‍රතිචාර (Reviews) සඳහා කෙසේ ප්‍රතිචාර දැක්විය යුතුද?", a_jp: "いいいけんもわるいいけんも、ていねいにおんれいやおわびのへんしんをかきます。", a_en: "Write polite responses of thanks or apologies to both good and bad reviews.", a_si: "හොඳ හෝ නරක ඕනෑම ප්‍රතිචාරයකට, ඉතා කාරුණිකව ස්තූතිය හෝ කණගාටුව පළ කරමින් පිළිතුරු ලිවීම." },
+            { id: 7, q_jp: "おきゃくさまからきゅうなりくエすとがあったとき、どうしますか。", q_en: "What to do upon a sudden request from a guest?", q_si: "පාරිභෝගිකයෙකුගෙන් හදිසි ඉල්ලීමක් ලැබුණු විට කළ යුත්තේ කුමක්ද?", a_jp: "できないとすぐにことわらず、できるかどうかじょうしやちゅうぼうにかくにんします。", a_en: "Do not decline immediately; check with your supervisor or kitchen if possible.", a_si: "නොහැකි බව එකවරම නොපවසා, එය කළ හැකිදැයි ඉහළ නිලධාරියාගෙන් හෝ කුස්සියෙන් පරීක්ෂා කර බැලීම." },
+            { id: 8, q_jp: "ほてるのなかでおきゃくさまにばしょをあんないするとき、どうしますか。", q_en: "How to guide a guest to a place in the hotel?", q_si: "හෝටලය තුළදී පාරිභෝගිකයෙකුට ස්ථානයක් පෙන්වා දීමේදී කළ යුත්තේ කුමක්ද?", a_jp: "おきゃくさまのすこしまえをあるき、てのひらをうえにむけてほうこうをします。", a_en: "Walk slightly ahead of the guest and point direction with palm facing up.", a_si: "පාරිභෝගිකයාට මඳක් ඉදිරියෙන් ගමන් කරමින්, අත්ල උඩු අතට හරවා දිශාව පෙන්වීම." },
+            { id: 9, q_jp: "ほてるのへやがぜんぶよやくでいっぱいになることをなんといいますか。", q_en: "What is it called when all hotel rooms are fully booked?", q_si: "හෝටලයේ සියලුම කාමර වෙන් වී අවසන් (Full Booking) වීම හඳුන්වන්නේ කුමන නමකින්ද?", a_jp: "「まどまり」といいます。", a_en: "It is called 'Madomari'.", a_si: "එය 'මදොමරි' (Madomari) ලෙස හඳුන්වයි." },
+            { id: 10, q_jp: "えいせいかんりのために、しごとでつかうくつはどのようにしますか。", q_en: "How to manage work shoes for hygiene?", q_si: "සනීපාරක්ෂාව සුරැකීම සඳහා, සේවා මුරයේදී පළඳින සපත්තු තබාගත යුත්තේ කෙසේද?", a_jp: "ほかのかたまざらないようにし、いつもせいけつにあらっておきます。", a_en: "Keep separate from others' shoes and wash them clean regularly.", a_si: "අනෙක් අයගේ සපත්තු සමඟ මිශ්‍ර නොවන සේ තබා ගත යුතු අතර, සැමවිටම පිරිසිදුව තබා ගැනීම." },
+            { id: 11, q_jp: "でんわたいおうでやってはいけないことはなんですか。", q_en: "What should NOT be done during phone calls?", q_si: "දුරකථන ඇමතුමකට පිළිතුරු දීමේදී නොකළ යුතු වැරදි ක්‍රියාව කුමක්ද?", a_jp: "おきゃくさまよりさきにでんわをぶつっときることです。", a_en: "Hanging up the phone before the guest does.", a_si: "පාරිභෝගිකයා ඇමතුම විසන්ධි කිරීමට පෙර, සේවකයා විසින් ඇමතුම විසන්ධි කිරීම." },
+            { id: 12, q_jp: "そむりえはなんにかんするぷろふぇっしょなるですか。", q_en: "What professional field is a Sommelier in?", q_si: "'සොමලියර්' (Sommelier) යනු කුමන ක්ෂේත්‍රයකට අදාළ විශේෂඥයෙක්ද?", a_jp: "わいんです。", a_en: "Wine.", a_si: "වයින් (Wine) පිළිබඳවයි." },
+            { id: 13, q_jp: "ゆうしょくはなくて、ちょうしょくだけがついているぷらんをなんといいますか。", q_en: "What is a plan with breakfast only (no dinner) called?", q_si: "රාත්‍රී ආහාරය නොමැතිව, උදෑසන ආහාරය පමණක් ඇතුළත් වන පැකේජය හඳුන්වන්නේ කෙසේද?", a_jp: "「いっぱくちょうしょくつきぷらん」または「びーあんどびー」です。", a_en: "'Ippaku Choshoku Tsuki' or 'B&B' (Bed & Breakfast).", a_si: "එක් රැයකට උදෑසන ආහාරය පමණක් ඇතුළත් පැකේජය (Bed & Breakfast) ලෙසයි." },
+            { id: 14, q_jp: "うぉーくいんのおきゃくさまとはどのようなかたですか。", q_en: "Who is a 'Walk-in' guest?", q_si: "'Walk-in' පාරිභෝගිකයෙකු යනු කෙබඳු කෙනෙක්ද?", a_jp: "よやくをしないでちょくせつ ほてるにくるおきゃくさまです。", a_en: "A customer who comes directly to the hotel without a reservation.", a_si: "කල්තියා වෙන්කරවා ගැනීමක් නොකර, සෘජුවම හෝටලයට පැමිණෙන පාරිභෝගිකයාය." },
+            { id: 15, q_jp: "よやくをかんせるしたときにはらうおかねをなんといいますか。", q_en: "What is the fee paid when cancelling a reservation called?", q_si: "කල්තියා කළ වෙන්කරවා ගැනීමක් අවලංගු කළ විට ගෙවිය යුතු මුදල හඳුන්වන්නේ කෙසේද?", a_jp: "「かんせるりょう」または「かんせるちゃーじ」です。", a_en: "'Cancellation Fee' or 'Cancellation Charge'.", a_si: "Cancellation Charge (කැන්සලේෂන් චාජ්) ලෙසයි." },
+            { id: 16, q_jp: "おきゃくさまがほてるのろびーにきたとき、どのようにはなしかけますか。", q_en: "How to address a guest when they enter the lobby?", q_si: "පාරිභෝගිකයෙකු හෝටලයේ ලොබියට පැමිණි විට, ඔහුට කතා කළ යුත්තේ කෙසේද?", a_jp: "「いらっしゃいませ。なにかおてつだいできることはございますか」", a_en: "'Welcome. Is there anything I can help you with?'", a_si: "'ආයුබෝවන්, ඔබට මා වෙතින් විය යුතු යම් උපකාරයක් තිබේද?'" },
+            { id: 17, q_jp: "しゃんぷーやはぶらしなど、へやにあるものをなんといいますか。", q_en: "What are room items like shampoo and toothbrushes called?", q_si: "ෂැම්පු, දත් බුරුසු වැනි කාමරයේ පාවිච්චි කරන දේවල් පොදුවේ හඳුන්වන්නේ කෙසේද?", a_jp: "「あめにてぃ」といいます。", a_en: "They are called 'Amenities'.", a_si: "Amenities (ඇමෙනිටීස්) ලෙසයි." },
+            { id: 18, q_jp: "おきゃくさまのにもつをはこぶとき、ただしいほうほうはどれですか。", q_en: "What is the correct way to carry a guest's luggage?", q_si: "පාරිභෝගිකයාගේ බෑග්/ලැගේජ් රැගෙන යාමේදී නිවැරදි ක්‍රමය කුමක්ද?", a_jp: "にもつをきずつつけないようにりょうてでもち、おきゃくさまのうしろからついていきます。", a_en: "Hold with both hands to avoid damage and follow behind the guest.", a_si: "බෑගයට හානි නොවන සේ දෑතින්ම රැගෙන, පාරිභෝගිකයා පිටුපසින් ගමන් කළ යුතුය." },
+            { id: 19, q_jp: "にほんのほてるでおきゃくさまからちっぷをもらったとき、どうしますか。", q_en: "What to do if given a tip at a Japanese hotel?", q_si: "ජපානයේ හෝටලයකදී පාරිභෝගිකයෙකුගෙන් 'Tip' මුදලක් ලැබුණහොත් කළ යුත්තේ කුමක්ද?", a_jp: "にほんではちっぷのしゅうかんがないため、ていねいにことわるか、ほてるのるーるにしたがいます。", a_en: "As Japan has no tipping custom, politely refuse or follow hotel rules.", a_si: "ජපානයේ ටිප් දීමේ සිරිතක් නොමැති බැවින් එය කාරුණිකව ප්‍රතික්ෂේප කිරීම හෝ හෝටලයේ රීති වලට අනුව ක්‍රියා කිරීම." },
+            { id: 20, q_jp: "えいせいかんりのためのただしいてあらいはどうしますか。", q_en: "How to wash hands correctly for hygiene management?", q_si: "සනීපාරක්ෂාව රැකෙන පරිදි නිවැරදිව අත් සෝදන්නේ කෙසේද?", a_jp: "せっけんをつかい、つめのあいだやてくびまで30びょういじょうあらいます。", a_en: "Use soap and scrub between nails and up to wrists for over 30 seconds.", a_si: "සබන් යොදා, නියපොතු අතර සහ මැණික්කටුව දක්වා තත්පර 30කට වඩා හොඳින් අතුල්ලා සේදීම." },
+            { id: 21, q_jp: "ふろんとのすたっふのおもなしごとはなんですか。", q_en: "What is the main duty of front desk staff?", q_si: "ෆ්‍රන්ට් කාර්ය මණ්ඩලයේ ප්‍රධානතම රාජකාරිය කුමක්ද?", a_jp: "ちぇっくいんやちぇっくあうとのてづづき、おきゃくさまのあんないをします。", a_en: "Check-in/Check-out procedures and guiding guests.", a_si: "Check-in සහ Check-out කටයුතු කිරීම සහ පාරිභෝගිකයන්ට අවශ්‍ය තොරතුරු සැපයීම." },
+            { id: 22, q_jp: "わしょくでしゅんのしょくざいをつかうのはなぜですか。", q_en: "Why use seasonal (Shun) ingredients in Washoku?", q_si: "ජපන් ආහාර කලාවේදී ඒ ඒ කාලයට වැවෙන (Seasonal) ආහාර ද්‍රව්‍ය (Shun) භාවිතා කරන්නේ ඇයි?", a_jp: "そのきせつが1ばんおいしくて、えいようがほうふだからです。", a_en: "Because they taste best and have peak nutritional value during that season.", a_si: "එම කාල සීමාව තුළ එම ආහාර වල රසය උපරිම වීම සහ පෝෂණය ඉහළම මට්ටමක පවතින බැවිනි." },
+            { id: 23, q_jp: "ほてるのうぇぶさいとにかならずのせておくべきじょうほうはどれですか。", q_en: "What information must be listed on a hotel website?", q_si: "හෝටල් වෙබ් අඩවියක අනිවාර්යයෙන්ම ප්‍රදර්ශනය කළ යුතු තොරතුර කුමක්ද?", a_jp: "へやのしゅるい、しゅくはくりょうきん、あくせすなどです。", a_en: "Room types, accommodation rates, access/location, etc.", a_si: "කාමර වර්ග, නවාතැන් මිල ගණන් සහ හෝටලය පිහිටි ස්ථානය (Access) වැනි දෑය." },
+            { id: 24, q_jp: "ほてるがとてもいそがしいとき、すたっふはどうしますか。", q_en: "What should staff do when the hotel is extremely busy?", q_si: "හෝටලය ඉතා කාර්ය බහුල වන අවස්ථාවකදී සේවකයන් කළ යුත්තේ කුමක්ද?", a_jp: "ひとりでぜんぶやろうとせず、ちーむわーくでじょうほうをきょうゆう します。", a_en: "Do not try to do everything alone; share info and use teamwork.", a_si: "තනියම සියල්ල කිරීමට නොගොස්, සාමූහිකව (Teamwork) තොරතුරු හුවමාරු කර ගනිමින් වැඩ කිරීම." },
+            { id: 25, q_jp: "りょこうということばのいみはなんですか。", q_en: "What is the meaning of the word 'Ryoko' (Travel)?", q_si: "'රියකෝ' (Travel) යන වචනයේ තේරුම කුමක්ද?", a_jp: "ほかのばしょへいってかんこうしたりたのしんだりすることです。", a_en: "Going to other places for sightseeing or enjoyment.", a_si: "වෙනත් ස්ථානයකට ගොස් සිරි නැරඹීම හෝ විනෝද වීමයි." },
+            { id: 26, q_jp: "おきゃくさまのちぇっくいんがおわったあと、なにをしますか。", q_en: "What to do right after check-in is complete?", q_si: "පාරිභෝගිකයාගේ චෙක් - ඉන් කටයුතු අවසන් වූ සැනින් ඊළඟට කරන්නේ කුමක්ද?", a_jp: "おきゃくさまのにもつをもち、へやまであんないします。", a_en: "Carry the guest's luggage and guide them to their room.", a_si: "පාරිභෝගිකයාගේ බෑග් ද රැගෙන ඔහුව කාමරය වෙත කැඳවාගෙන යාම." },
+            { id: 27, q_jp: "いっぱんてきなてーぶるまなーでただしいものはどれですか。", q_en: "What is correct regarding western table manners?", q_si: "බටහිර ආහාර ගැනීමේ මේස සිරිත් වලට අනුව නිවැරදි දේ කුමක්ද?", a_jp: "ないふとふぉーくは、そとがわからじゅんばんにつかいます。", a_en: "Use knives and forks sequentially from the outside inwards.", a_si: "පිහිය සහ ගෑරුප්පුව, පිටත පැත්තේ ඇති උපකරණවල සිට ඇතුළට පිළිවෙළින් භාවිතා කිරීම." },
+            { id: 28, q_jp: "おきゃくさまからくれーむがあったとき、まずするべきことはなんですか。", q_en: "What is the first thing to do when a guest complains?", q_si: "පාරිභෝගිකයෙකුගෙන් පැමිණිල්ලක් ආ විට මුලින්ම කළ යුත්තේ කුමක්ද?", a_jp: "おきゃくさまのきもちにきょうかんし、もうしわけございませんとおわびします。", a_en: "Empathize with the guest's feelings and offer a sincere apology.", a_si: "පාරිභෝගිකයාගේ අපහසුතාවය වටහාගෙන කණගාටුව පළ කිරීම (Apologize)." },
+            { id: 29, q_jp: "むすりむのおきゃくさまがたべられないものはなんですか。", q_en: "What can Muslim guests NOT consume?", q_si: "මුස්ලිම් භක්තික පාරිභෝගිකයන්ට ආහාරයට ගත නොහැකි දෑ මොනවාද?", a_jp: "ぶたにくとあるこーる(おさけ)です。", a_en: "Pork and alcohol.", a_si: "ඌරු මස් සහ මත්පැන්/ඇල්කොහොල් අඩංගු දෑය." },
+            { id: 30, q_jp: "ちぇっくあうとのおきゃくさまをみおくるとき、なんといいますか。", q_en: "What to say when seeing off check-out guests?", q_si: "කාමර වලින් පිටව යන පාරිභෝගිකයෙකුට සමුදීමේදී පවසන්නේ කුමක්ද?", a_jp: "「いってらっしゃいませ」または「またのおこしをおまちしております」", a_en: "'Itterasshaimase' or 'Mata no okoshi o omachi shite orimasu'.", a_si: "'සුභ ගමනක්' හෝ 'නැවත පැමිණෙන තෙක් බලා සිටිමු' යන්නයි." },
+            { id: 31, q_jp: "ちぇっくいんのときに、さいしょにするべきことはなんですか。", q_en: "What should be done first during Check-in?", q_si: "චෙක් - ඉන් කිරීමේදී, මුලින්ම කළ යුතු දේ කුමක්ද?", a_jp: "ちぇっくいんのせつめいをします。", a_en: "Provide an explanation of the check-in procedure.", a_si: "චෙක් - ඉන් පිළිබඳ පැහැදිලි කිරීම සිදු කරයි." },
+            { id: 32, q_jp: "いっぱくにしょくのぷらんで、えらべるちょうしょくはどれですか。", q_en: "What breakfast options are selectable in 1-night 2-meal plans?", q_si: "එක් රැයකට වේල් දෙකක් ඇතුළත් පැකේජයේ, තෝරාගත හැකි උදෑසන ආහාර වර්ග මොනවාද?", a_jp: "わしょくとようしょくです。", a_en: "Japanese style (Washoku) and Western style (Yoshoku).", a_si: "ජපන් පන්නයේ ආහාර සහ බටහිර පන්නයේ ආහාර වේ." },
+            { id: 33, q_jp: "りょかんで、おきゃくさまのおせわをする、おかみやなかいのしごとはなんですか。", q_en: "What is the job of Okami and Nakai in a Ryokan?", q_si: "ජපන් සම්ප්‍රදායික නවාතැන් පොළක (රියොකන්), 'ඔකාමි' සහ 'නකායි' ගේ කාර්යය කුමක්ද?", a_jp: "おきゃくさまをへやへあんないしたり、おせわをしたりします。", a_en: "Guiding guests to rooms and taking care of their service needs.", a_si: "පාරිභෝගිකයාව කාමරයට කැඳවාගෙන යාම සහ සේවා සැපයීමයි." },
+            { id: 34, q_jp: "ほてるでかじがおきたとき、どこにでんわしなければなりませんか。", q_en: "What number to call during a fire at the hotel?", q_si: "හෝටලයේ ගින්නක් ඇති වූ විට, ඇමතිය යුතු අංකය කුමක්ද?", a_jp: "「119」にでんわします。", a_en: "Call '119'.", a_si: "119 අංකයට ඇමතුමක් ලබා දිය යුතුය." },
+            { id: 35, q_jp: "くるまいすのおきゃくさまとはなすとき、どのようにたいおうしますか。", q_en: "How to interact when speaking to a wheelchair guest?", q_si: "රෝද පුටුවක සිටින පාරිභෝගිකයෙකු සමඟ කතා කිරීමේදී, කෙසේ ප්‍රතිචාර දැක්විය යුතුද?", a_jp: "おきゃくさまとめをあわせてはなします。", a_en: "Lower down to make direct eye contact at their eye level.", a_si: "පාරිභෝගිකයාගේ ඇස් මට්ටමට පැමිණ කතා කරයි." },
+            { id: 36, q_jp: "ようしょくをたべるときにつかうものはなんですか。", q_en: "What utensils are used when eating Western food?", q_si: "බටහිර පන්නයේ ආහාර ගන්නා විට භාවිතා කරන දේ කුමක්ද?", a_jp: "おーどぶるのないふやふぉーくです。", a_en: "Hors d'oeuvre knife and fork.", a_si: "Hors d'oeuvre (ඔඩො බුරි) පිහිය සහ ගෑරුප්පුවයි." },
+            { id: 37, q_jp: "しんとうてきなわしょくにふくまれていないおいるはどれですか。", q_en: "Which oil is NOT included in traditional Washoku?", q_si: "සම්ප්‍රදායික ජපන් ආහාර වල අඩංගු නොවන තෙල් වර්ගය කුමක්ද?", a_jp: "おりーぶおいるです。", a_en: "Olive oil.", a_si: "ඔලිව් තෙල් වේ." },
+            { id: 38, q_jp: "おきゃくさまがおこってくれーむをいっているとき、さいしょになにをしますか。", q_en: "What to do first when a guest is angrily complaining?", q_si: "පාරිභෝගිකයෙකු කෝපයෙන් පැමිණිල්ලක් සිදු කරන විට, මුලින්ම කළ යුත්තේ කුමක්ද?", a_jp: "おきゃくさまのはなしをさいごまでしっかりききます。", a_en: "Listen carefully to the guest's story until the end without interrupting.", a_si: "පාරිභෝගිකයා කතා කර අවසන් වනතුරු හොඳින් සවන් දිය යුතුය." },
+            { id: 39, q_jp: "おきゃくさまがほてるにとうちゃくしたとき、さいしょにだすのみものはなんですか。", q_en: "What drink is served first when a guest arrives at the hotel?", q_si: "පාරිභෝගිකයෙකු හෝටලයට පැමිණි විට, මුලින්ම ලබා දෙන පානය කුමක්ද?", a_jp: "うぇるかむどりんく (わいんやみずなど)です。", a_en: "Welcome drink (wine, water, etc.).", a_si: "Welcome drink - වයින් හෝ ජලය වැනි දෑ වේ." },
+            { id: 40, q_jp: "よやくをしないで、ちょくせつほてるにくるおきゃくさまをなんといいますか。", q_en: "What are guests called who arrive without a reservation?", q_si: "කල්තියා වෙන්කරවා ගැනීමක් නොකර, සෘජුවම හෝටලයට පැමිණෙන පාරිභෝගිකයින් හඳුන්වන්නේ කෙසේද?", a_jp: "うぉーくいんです。", a_en: "Walk-in guests.", a_si: "Walk-in පාරිභෝගිකයන් ලෙසයි." },
+            { id: 41, q_jp: "えーじぇんしーをつかわず、ほてるのさいとなどでちょくせつよやくすることをなんといいま", q_en: "What is booking directly on hotel site (without agency) called?", q_si: "නියෝජිත ආයතන භාවිතා නොකර, හෝටලයේ වෙබ් අඩවියෙන් සෘජුවම වෙන් කරවා ගැනීම හඳුන්වන්නේ කෙසේද?", a_jp: "だいれくとぶっきんぐです。", a_en: "Direct Booking.", a_si: "Direct Booking (සෘජු වෙන් කරවා ගැනීම) ලෙසයි." },
+            { id: 42, q_jp: "でんわがかかってきたとき、さいしょにいうことばはなんですか。", q_en: "What is the first thing to say when answering a call?", q_si: "දුරකථන ඇමතුමක් ලැබුණු විට, මුලින්ම කිව යුතු වදන කුමක්ද?", a_jp: "「おでんわありがとうございます。○○ほてるでございます。」", a_en: "'Thank you for calling. This is [Hotel Name].'", a_si: "'දුරකථන ඇමතුමට ස්තූතියි. මෙය OO හෝටලයයි.'" },
+            { id: 43, q_jp: "ふろんとのすたっふのふくは、どのようになっていなければなりませんか。", q_en: "How should front desk staff attire be maintained?", q_si: "ප්‍රන්ට් ඔෆිස් කාර්ය මණ්ඩලයේ ඇඳුම් පැළඳුම් කෙසේ තිබිය යුතුද?", a_jp: "しわがなくて、せいけつなふくをきます。", a_en: "Wear clean clothing without wrinkles.", a_si: "රැළි නොවැටුණු, පිරිසිදු ඇඳුම් ඇඳිය යුතුය." },
+            { id: 44, q_jp: "けんしゅう中のすたっふが、さいしょにはいるしふとはどれですか。", q_en: "Which shift does a staff trainee enter first?", q_si: "පුහුණුව ලබන සේවකයෙකු මුලින්ම යොදවන වැඩ මුරය කුමක්ද?", a_jp: "ひるのしふと (でいしふと)です。", a_en: "Day Shift (Daytime shift).", a_si: "දවල් වැඩ මුරය (Day Shift) වේ." },
+            { id: 45, q_jp: "わいんのほうふなちしきをもち、おきゃくさまにえらぶすたっふをなんといいますか。", q_en: "What is a staff member with rich wine knowledge called?", q_si: "වයින් පිළිබඳ පුළුල් දැනුමක් ඇති, පාරිභෝගිකයාට ඒවා තෝරා දෙන සේවකයා හඳුන්වන්නේ කෙසේද?", a_jp: "そむりえです。", a_en: "Sommelier.", a_si: "Sommelier (සොමලියර්) ලෙසයි." },
+            { id: 46, q_jp: "びーるをつぐとき、うえになにをつくらなければなりませんか。", q_en: "What must be formed on top when pouring beer?", q_si: "බියර් වත් කරන විට, ඉහළින් සෑදිය යුත්තේ කුමක්ද?", a_jp: "あわです。", a_en: "Foam (Awa).", a_si: "පෙන (Foam) වේ." },
+            { id: 47, q_jp: "ほてるでふろんつのぎょうむがおわったあと、おきゃくさまをへやへあんないするのはだれで", q_en: "Who guides the guest to the room after front desk procedures?", q_si: "හෝටයක ෆ්‍රන්ට් වැඩකටයුතු අවසන් වූ පසු, පාරිභෝගිකයාව කාමරයට කැඳවාගෙන යන්නේ කවුද?", a_jp: "ふろんとのすたっふです。", a_en: "Front staff.", a_si: "Front staff (ප්‍රන්ට් කාර්ය මණ්ඩලය) වේ." },
+            { id: 48, q_jp: "かんきょうをまもるために、ほてるでできることはなんですか。", q_en: "What can be done at a hotel to protect the environment?", q_si: "පරිසරය සුරැකීම සඳහා හෝටලයකදී කළ හැකි ක්‍රියාමාර්ගය කුමක්ද?", a_jp: "でんきやみずをたいせつにつかいます。", a_en: "Use electricity and water conservatively.", a_si: "විදුලිය සහ ජලය අරපිරිමැස්මෙන් භාවිත කිරීමයි." },
+            { id: 49, q_jp: "おきゃくさまがしょくじをしているときに、つうろですれちがったらどうしますか。", q_en: "What to do if passing a dining guest in a hallway?", q_si: "පාරිභෝගිකයෙකු ආහාර ගනිමින් සිටින විට, අප ඔවුන් අසලින් පසු කර යන්නේ නම් කළ යුත්තේ කුමක්ද?", a_jp: "えしゃくをします。", a_en: "Perform an Eshaku bow (15° nod).", a_si: "එෂාකු (හිස මඳක් නමා ආචාර කිරීම) කරයි." },
+            { id: 50, q_jp: "おきゃくさまとむかいあったとき、どのようにあいさつをしますか。", q_en: "How to greet when meeting a guest face-to-face?", q_si: "පාරිභෝගිකයෙකු මුහුණට මුහුණ හමු වූ විට, ආචාර කරන්නේ කෙසේද?", a_jp: "すこしからだをかたむけて、えしゃくをします。", a_en: "Incline body slightly and bow (Eshaku).", a_si: "මඳක් ඉදිරියට නැමී හිස නමා ආචාර කරයි." },
+            { id: 51, q_jp: "おきゃくさまをみおくるときや、かんしゃをつたえるときの「けいれい」のかくどはなんどで", q_en: "What angle is the bow when seeing off guests or expressing thanks?", q_si: "පාරිභෝගිකයෙකු පිටත් කර හැරීමේදී හෝ ස්තූති කිරීමේදී කරන 'Keirei' ආචාරයේ කෝණය අංශක කීයක්ද?", a_jp: "30どです。", a_en: "30 degrees (Futsuurei).", a_si: "අංශක 30 කි." },
+            { id: 52, q_jp: "くろーくでおきゃくさまからあずかるものはなんですか。", q_en: "What items are kept for guests at the cloakroom?", q_si: "Cloak එකේදී පාරිභෝගිකයන්ගෙන් බාරගන්නේ මොනවාද?", a_jp: "にもつやこーとです。", a_en: "Luggage and coats.", a_si: "බෑග්/ ලැගේජ් සහ කෝට් ඇඳුම්ය." },
+            { id: 53, q_jp: "おきゃくさまから1まんえんをあずかったとき、なんといいますか。", q_en: "What to say when receiving 10,000 yen from a guest?", q_si: "පාරිභෝගිකයාගෙන්යෙන් 10,000ක් ලැබුණු විට, කුමක් කිව යුතුද?", a_jp: "「1まんえんおあずかりいたします」", a_en: "'Ichiman-en o-azukari itashimasu' (Receiving 10,000 yen).", a_si: "'යෙන් 10,000ක් බාරගන්නවා' යන්නයි." },
+            { id: 54, q_jp: "きゃくしつせいそうのあと、さいごにちぇっくすることはなんですか。", q_en: "What is checked last after cleaning a guest room?", q_si: "කාමරය පිරිසිදු කිරීමෙන් පසු අවසානයටම පරීක්ෂා කරන්නේ කුමක්ද?", a_jp: "わすれものがないか、へやがきれいかかくにんします。", a_en: "Check for forgotten items and confirm room neatness.", a_si: "අමතක වී ගිය බඩු තිබේද සහ කාමරය පිළිවෙළද යන්නයි." },
+            { id: 55, q_jp: "おきゃくさまが「あれるぎー」があるといったとき、すたっふはどうしなければなりません", q_en: "What to do if a guest states they have an allergy?", q_si: "පාරිභෝගිකයෙකුට ඇලර්ජි එකක් ඇති බව කීවොත්, සේවකයා කුමක් කළ යුතුද?", a_jp: "すぐにちゅうぼうにほんじつのしょくざいをかくにんします。", a_en: "Immediately check today's ingredients with the kitchen.", a_si: "වහාම කුස්සියට දන්වා එදින ආහාරවල අඩංගු ද්‍රව්‍ය පරීක්ෂා කළ යුතුය." },
+            { id: 56, q_jp: "くれーむのほうこく", q_en: "How to report a complaint handled?", q_si: "පැමිණිල්ලකට විසඳුම් දුන් පසු, කළ යුත්තේ කුමක්ද?", a_jp: "じょうしにほうこくして、のーとにかきます。", a_en: "Report to superior and write down in the note log.", a_si: "ඉහළ නිලධාරියාට ඒ බව වාර්තා කර Note එකක් තැබිය යුතුය." },
+            { id: 57, q_jp: "へやでおきゃくさまのわすれものをみつけたとき、どうしますか。", q_en: "What to do if a lost item is found in a guest room?", q_si: "කාමරයක තිබී පාරිභෝගිකයෙකුගේ අමතක වූ බඩුවක් හමු වූ විට, කුමක් කරන්නේද?", a_jp: "ひづけとへやばんごうをかいて、ほかんします。", a_en: "Record date and room number, and store safely.", a_si: "දිනය සහ කාමර අංකය ලියා සුරක්ෂිතව තැබිය යුතුය." },
+            { id: 58, q_jp: "はらーるへのたいおう", q_en: "What foods are restricted for Halal dietary guests?", q_si: "හලාල් ආහාර ගන්නා පාරිභෝගිකයෙකුට ආහාරයට ගත නොහැකි දෑ මොනවාද?", a_jp: "ぶたにくとおさけです。", a_en: "Pork and alcohol.", a_si: "ඌරු මස් සහ මත්පැන් වේ." },
+            { id: 59, q_jp: "ちぇっくあうとじのあいさつ", q_en: "What is the greeting at Check-out time?", q_si: "Check out වී යන පාරිභෝගිකයෙකුට, කෙසේ ආචාර කරන්නේද?", a_jp: "「ありがとうございました。またのおこしをおまちしております」", a_en: "'Arigato gozaimashita. Mata no okoshi o omachi shite orimasu.'", a_si: "'ස්තූතියි, නැවත පැමිණෙන තෙක් බලා සිටිමු' යන්නයි." },
+            { id: 60, q_jp: "いんばうんどのいみ", q_en: "What is the meaning of 'Inbound'?", q_si: "Inbound පාරිභෝගිකයන් යනු කවුද?", a_jp: "がいこくからにほんにくるかんこうきゃくです。", a_en: "Foreign tourists visiting Japan from overseas.", a_si: "විදේශයන්ගෙන් ජපානයට පැමිණෙන සංචාරකයන්ය." },
+            { id: 61, q_jp: "ほてるのぎょうむでたいせつな「ほうれんそう」のただしいくみあわせはどれですか。", q_en: "What is the correct combination for 'Horenso' in hotel operations?", q_si: "හෝටල් සේවයේදී ඉතා වැදගත් වන 'හොරෙන්සෝ' හි නිවැරදි එකතුව කුමක්ද?", a_jp: "「ほうこく・れんらく・そうだん」です。", a_en: "Report (Hokoku), Contact (Renraku), Consult (Sodan).", a_si: "වාර්තා කිරීම, සම්බන්ධීකරණය (දැනුම් දීම) සහ උපදෙස් ලබා ගැනීමයි." },
+            { id: 62, q_jp: "ふろんとでおきゃくさまにるーむきーをわたすとき、まちがっているほうほうはどれですか。", q_en: "What is WRONG when handing over room keys at front desk?", q_si: "පිළිගැනීමේ කවුන්ටරයේදී පාරිභෝගිකයාට කාමර යතුරු දීමේදී වැරදි පිළිවෙළ කුමක්ද?", a_jp: "かうんたーのうえにおいて、かたてでかるくわたすことです。", a_en: "Placing key on counter and lightly pushing with one hand.", a_si: "කවුන්ටරය මත තබා, එක් අතකින් සැහැල්ලුවෙන් තල්ලු කර දීමයි." },
+            { id: 63, q_jp: "ほてるのうぇぶさいとにのせてはいけないじょうほうはどれですか。", q_en: "What information must NOT be posted on hotel website?", q_si: "හෝටල් වෙබ් අඩවියක පළ නොකළ යුතු (තහනම්) තොරතුරු කුමක්ද?", a_jp: "じゅうぎょういんのこじんのじゅうしょやでんわばんごうです。", a_en: "Employees' personal addresses or phone numbers.", a_si: "සේවකයින්ගේ පෞද්ගලික ලිපින හෝ දුරකථන අංක වේ." },
+            { id: 64, q_jp: "おきゃくさまにわるいいんしょうをあたえるはなしかたはどれですか。", q_en: "What manner of speaking gives guests a BAD impression?", q_si: "පාරිභෝගිකයා තුළ නරක ප්‍රතිරූපයක් ඇති කරන කතා විලාසය කුමක්ද?", a_jp: "はやぐちでまくしたてるようにはなすことです。", a_en: "Speaking rapidly and continuously without stopping.", a_si: "වේගයෙන්, නොනවත්වාම කතා කිරීමයි." },
+            { id: 65, q_jp: "おきゃくさまをながいじかん またせてしまったとき、さいしょのあいさつはなんですか。", q_en: "First greeting when keeping a guest waiting for a long time?", q_si: "පාරිභෝගිකයෙකුට බොහෝ වේලාවක් බලා සිටීමට සැලස් වූ විට, මුලින්ම කිව යුතු නිවැරදි වදන කුමක්ද?", a_jp: "「おまたせいたしました」です。", a_en: "'O-matase itashimashita' (Thank you for waiting).", a_si: "'ඔබව බලා සිටීමට සැලස් වීම ගැන කණගාටුයි' යනුවෙනි." },
+            { id: 66, q_jp: "ろうかで おきゃくさまのよこをとおりすぎるとき、すたっふはどうしますか。", q_en: "What to do when passing by a guest in a hallway?", q_si: "කොරිඩෝවකදී පාරිභෝගිකයෙකු පසුකරමින් යාමට සිදුවන විට, සේවකයා කළ යුත්තේ කුමක්ද?", a_jp: "いちどたちどまって、おじぎ(えしゃく)をします。", a_en: "Stop briefly and perform an Eshaku bow.", a_si: "මඳකට නතර වී, හිස නමා (එෂාකු ආකාරයෙන්) ආචාර කිරීමයි." },
+            { id: 67, q_jp: "みがふじゅうなおきゃくさまへのあんない、まちがっているたいおうはどれですか。", q_en: "What is WRONG response when guiding hearing-impaired guest?", q_si: "ශ්‍රවණාබාධිත පාරිභෝගිකයින්ට මඟ පෙන්වීමේදී නොකළ යුතු (වැරදි) පිළිවෙළ කුමක්ද?", a_jp: "うしろから おおきなこえでさけぶようにはなしかけることです。", a_en: "Shouting in a loud voice from behind.", a_si: "පිටුපස සිට විශාල ශබ්දයෙන් කෑගසමින් කතා කිරීමයි." },
+            { id: 68, q_jp: "しんにゅうしゃいんがさいしょにはるこことがおおいしふとはどれですか。", q_en: "What shift do new employees usually join first?", q_si: "නවක සේවකයෙකු මුල් කාලයේදී බහුලව යොදවන වැඩ මුරය (Shift) කුමන කාල සීමාවද?", a_jp: "「にっきん(でいしふと・ひるのきんむ)」です。", a_en: "Day Shift (Nikkin / Daytime duty).", a_si: "දවල් වැඩ මුරය (Day Shift) වේ." },
+            { id: 69, q_jp: "ほてるぎょうむにおける「あずかりきん」とは、なんですか。", q_en: "What is 'Azukarikin' in hotel business operations?", q_si: "හෝටල් ක්ෂේත්‍රයේ 'අස්වාරිකින්' (තාවකාලිකව තබා ගන්නා මුදල්) යන්නෙහි තේරුම කුමක්ද?", a_jp: "おきゃくさまからいちじてきにおあずかりするおかねです。", a_en: "Money temporarily kept from the customer.", a_si: "පාරිභෝගිකයාගෙන් තාවකාලිකව භාර ගන්නා මුදල් වේ." }
+        ];
+
+        // MASTER 360 VOCABULARY DATA ORGANIZED INTO 20 CATEGORIES
+        const vocabCategoriesData = [
+            {
+                id: 1, name: "01. HOTEL & ACCOMMODATION BASICS", icon: "🏨",
+                words: [
+                    { id: 1, kanji: "宿泊", kana: "しゅくはく", romaji: "shukuhaku", en: "accommodation", si: "නවාතැන්" },
+                    { id: 2, kanji: "宿泊施設", kana: "しゅくはくしせつ", romaji: "shukuhaku shisetsu", en: "accommodation facility", si: "නවාතැන් පහසුකම" },
+                    { id: 3, kanji: "ホテル", kana: "ほてる", romaji: "hoteru", en: "hotel", si: "හෝටලය" },
+                    { id: 4, kanji: "旅館", kana: "りょかん", romaji: "ryokan", en: "Japanese inn", si: "ජපන් සාම්ප්‍රදායික නවාතැන්" },
+                    { id: 5, kanji: "民宿", kana: "みんしゅく", romaji: "minshuku", en: "guesthouse", si: "ගෙස්ට්හවුස්" },
+                    { id: 6, kanji: "客室", kana: "きゃくしつ", romaji: "kyakushitsu", en: "guest room", si: "අමුත්තන්ගේ කාමරය" },
+                    { id: 7, kanji: "部屋", kana: "へや", romaji: "heya", en: "room", si: "කාමරය" },
+                    { id: 8, kanji: "お客様", kana: "おきゃくさま", romaji: "okyaku-sama", en: "guest/customer", si: "අමුත්තා/පාරිභෝගිකයා" },
+                    { id: 9, kanji: "宿泊客", kana: "しゅくはくきゃく", romaji: "shukuhaku-kyaku", en: "hotel guest", si: "නවාතැන් ගන්නා අමුත්තා" },
+                    { id: 10, kanji: "従業員", kana: "じゅうぎょういん", romaji: "jūgyōin", en: "employee", si: "සේවකයා" },
+                    { id: 11, kanji: "スタッフ", kana: "すたっふ", romaji: "sutaffu", en: "staff", si: "කාර්ය මණ්ඩලය" },
+                    { id: 12, kanji: "支配人", kana: "しはいにん", romaji: "shihainin", en: "manager", si: "කළමනාකරු" },
+                    { id: 13, kanji: "責任者", kana: "せきにんしゃ", romaji: "sekininsha", en: "person in charge", si: "වගකිවයුතු පුද්ගලයා" },
+                    { id: 14, kanji: "フロント", kana: "ふろんと", romaji: "furonto", en: "front desk", si: "ඉදිරිපස කවුන්ටරය" },
+                    { id: 15, kanji: "受付", kana: "うけつけ", romaji: "uketsuke", en: "reception", si: "පිළිගැනීමේ ස්ථානය" },
+                    { id: 16, kanji: "ロビー", kana: "ろびー", romaji: "robī", en: "lobby", si: "ලොබිය" },
+                    { id: 17, kanji: "入口", kana: "いりぐち", romaji: "iriguchi", en: "entrance", si: "ඇතුල්වීම" },
+                    { id: 18, kanji: "出口", kana: "でぐち", romaji: "deguchi", en: "exit", si: "පිටවීම" },
+                    { id: 19, kanji: "建物", kana: "たてもの", romaji: "tatemono", en: "building", si: "ගොඩනැගිල්ල" },
+                    { id: 20, kanji: "階", kana: "かい", romaji: "kai", en: "floor", si: "මහල" }
+                ]
+            },
+            {
+                id: 2, name: "02. RESERVATION & BOOKING", icon: "📅",
+                words: [
+                    { id: 21, kanji: "予約", kana: "よやく", romaji: "yoyaku", en: "reservation", si: "වෙන් කිරීම" },
+                    { id: 22, kanji: "予約する", kana: "よやくする", romaji: "yoyaku suru", en: "to reserve", si: "වෙන් කිරීම" },
+                    { id: 23, kanji: "予約者", kana: "よやくしゃ", romaji: "yoyakusha", en: "person who booked", si: "වෙන් කළ පුද්ගලයා" },
+                    { id: 24, kanji: "予約番号", kana: "よやくばんごう", romaji: "yoyaku bangō", en: "reservation number", si: "වෙන්කිරීමේ අංකය" },
+                    { id: 25, kanji: "予約確認", kana: "よやくかくにん", romaji: "yoyaku kakunin", en: "reservation confirmation", si: "වෙන්කිරීම තහවුරු කිරීම" },
+                    { id: 26, kanji: "予約状況", kana: "よやくじょうきょう", romaji: "yoyaku jōkyō", en: "reservation status", si: "වෙන්කිරීමේ තත්ත්වය" },
+                    { id: 27, kanji: "空室", kana: "くうしつ", romaji: "kūshitsu", en: "vacant room", si: "හිස් කාමරය" },
+                    { id: 28, kanji: "満室", kana: "まんしつ", romaji: "manshitsu", en: "fully booked", si: "සියලු කාමර පිරී ඇත" },
+                    { id: 29, kanji: "空き", kana: "あき", romaji: "aki", en: "availability", si: "හිස් ඉඩ" },
+                    { id: 30, kanji: "変更", kana: "へんこう", romaji: "henkō", en: "change", si: "වෙනස් කිරීම" },
+                    { id: 31, kanji: "予約変更", kana: "よやくへんこう", romaji: "yoyaku henkō", en: "reservation change", si: "වෙන්කිරීම වෙනස් කිරීම" },
+                    { id: 32, kanji: "取消", kana: "とりけし", romaji: "torikeshi", en: "cancellation", si: "අවලංගු කිරීම" },
+                    { id: 33, kanji: "キャンセル", kana: "きゃんせる", romaji: "kyanseru", en: "cancel", si: "අවලංගු කිරීම" },
+                    { id: 34, kanji: "キャンセル料", kana: "きゃんせるりょう", romaji: "kyanseru-ryō", en: "cancellation fee", si: "අවලංගු කිරීමේ ගාස්තුව" },
+                    { id: 35, kanji: "延長", kana: "えんちょう", romaji: "enchō", en: "extension", si: "දිගු කිරීම" },
+                    { id: 36, kanji: "日程", kana: "にってい", romaji: "nittei", en: "schedule/dates", si: "දින සැලැස්ම" },
+                    { id: 37, kanji: "到着日", kana: "とうちゃくび", romaji: "tōchakubi", en: "arrival date", si: "පැමිණෙන දිනය" },
+                    { id: 38, kanji: "出発日", kana: "しゅっぱつび", romaji: "shuppatsubi", en: "departure date", si: "පිටවන දිනය" },
+                    { id: 39, kanji: "泊", kana: "はく", romaji: "haku", en: "night stay counter", si: "රාත්‍රී නවාතැන් ගණන" },
+                    { id: 40, kanji: "連泊", kana: "れんぱく", romaji: "renpaku", en: "consecutive nights", si: "අඛණ්ඩ රාත්‍රී නවාතැන්" }
+                ]
+            },
+            {
+                id: 3, name: "03. CHECK-IN / CHECK-OUT", icon: "🔑",
+                words: [
+                    { id: 41, kanji: "チェックイン", kana: "ちぇっくいん", romaji: "chekku-in", en: "check-in", si: "ඇතුල්වීම" },
+                    { id: 42, kanji: "チェックアウト", kana: "ちぇっくあうと", romaji: "chekku-auto", en: "check-out", si: "පිටවීම" },
+                    { id: 43, kanji: "到着", kana: "とうちゃく", romaji: "tōchaku", en: "arrival", si: "පැමිණීම" },
+                    { id: 44, kanji: "出発", kana: "しゅっぱつ", romaji: "shuppatsu", en: "departure", si: "පිටවීම" },
+                    { id: 45, kanji: "到着時間", kana: "とうちゃくじかん", romaji: "tōchaku jikan", en: "arrival time", si: "පැමිණෙන වේලාව" },
+                    { id: 46, kanji: "出発時間", kana: "しゅっぱつじかん", romaji: "shuppatsu jikan", en: "departure time", si: "පිටවන වේලාව" },
+                    { id: 47, kanji: "身分証明書", kana: "みぶんしょうめいしょ", romaji: "mibun shōmeisho", en: "identification", si: "හැඳුනුම්පත" },
+                    { id: 48, kanji: "パスポート", kana: "ぱすぽーと", romaji: "pasupōto", en: "passport", si: "ගමන් බලපත්‍රය" },
+                    { id: 49, kanji: "宿泊者名簿", kana: "しゅくはくしゃめいぼ", romaji: "shukuhakusha meibo", en: "guest register", si: "අමුත්තන්ගේ ලියාපදිංචි ලේඛනය" },
+                    { id: 50, kanji: "記入", kana: "きにゅう", romaji: "kinyū", en: "filling in", si: "පිරවීම" },
+                    { id: 51, kanji: "署名", kana: "しょめい", romaji: "shomei", en: "signature", si: "අත්සන" },
+                    { id: 52, kanji: "確認", kana: "かくにん", romaji: "kakunin", en: "confirmation/check", si: "තහවුරු කිරීම" },
+                    { id: 53, kanji: "案内", kana: "あんない", romaji: "annai", en: "guidance", si: "මඟ පෙන්වීම" },
+                    { id: 54, kanji: "鍵", kana: "かぎ", romaji: "kagi", en: "key", si: "යතුර" },
+                    { id: 55, kanji: "カードキー", kana: "かーどきー", romaji: "kādo kī", en: "key card", si: "කාඩ් යතුර" },
+                    { id: 56, kanji: "返却", kana: "へんきゃく", romaji: "henkyaku", en: "return", si: "ආපසු භාරදීම" },
+                    { id: 57, kanji: "精算", kana: "せいさん", romaji: "seisan", en: "settlement", si: "අවසන් ගෙවීම් පියවීම" },
+                    { id: 58, kanji: "滞在", kana: "たいざい", romaji: "taizai", en: "stay", si: "නවාතැන් කාලය" },
+                    { id: 59, kanji: "滞在期間", kana: "たいざいきかん", romaji: "taizai kikan", en: "length of stay", si: "නවාතැන් කාලය" },
+                    { id: 60, kanji: "延泊", kana: "えんぱく", romaji: "enpaku", en: "extended stay", si: "නවාතැන් දිගු කිරීම" }
+                ]
+            },
+            {
+                id: 4, name: "04. ROOM & FACILITIES", icon: "🛏️",
+                words: [
+                    { id: 61, kanji: "ベッド", kana: "べっど", romaji: "beddo", en: "bed", si: "ඇඳ" },
+                    { id: 62, kanji: "シングルベッド", kana: "しんぐるべっど", romaji: "shinguru beddo", en: "single bed", si: "තනි ඇඳ" },
+                    { id: 63, kanji: "ダブルベッド", kana: "だぶるべっど", romaji: "daburu beddo", en: "double bed", si: "ද්විත්ව ඇඳ" },
+                    { id: 64, kanji: "ツインベッド", kana: "ついんべっど", romaji: "tsuin beddo", en: "twin beds", si: "twin ඇඳන්" },
+                    { id: 65, kanji: "布団", kana: "ふとん", romaji: "futon", en: "Japanese bedding", si: "ෆුටොන්" },
+                    { id: 66, kanji: "枕", kana: "まくら", romaji: "makura", en: "pillow", si: "කොට්ටය" },
+                    { id: 67, kanji: "毛布", kana: "もうふ", romaji: "mōfu", en: "blanket", si: "පොරවනය" },
+                    { id: 68, kanji: "シーツ", kana: "しーつ", romaji: "shītsu", en: "sheet", si: "ඇඳ ඇතිරිල්ල" },
+                    { id: 69, kanji: "掛け布団", kana: "かけぶとん", romaji: "kakebuton", en: "quilt", si: "පොරවනය" },
+                    { id: 70, kanji: "カーテン", kana: "かーてん", romaji: "kāten", en: "curtain", si: "තිරය" },
+                    { id: 71, kanji: "窓", kana: "まど", romaji: "mado", en: "window", si: "ජනේලය" },
+                    { id: 72, kanji: "ドア", kana: "どあ", romaji: "doa", en: "door", si: "දොර" },
+                    { id: 73, kanji: "テーブル", kana: "てーぶる", romaji: "tēburu", en: "table", si: "මේසය" },
+                    { id: 74, kanji: "椅子", kana: "いす", romaji: "isu", en: "chair", si: "පුටුව" },
+                    { id: 75, kanji: "テレビ", kana: "てれび", romaji: "terebi", en: "television", si: "රූපවාහිනිය" },
+                    { id: 76, kanji: "冷蔵庫", kana: "れいぞうこ", romaji: "reizōko", en: "refrigerator", si: "ශීතකරණය" },
+                    { id: 77, kanji: "エアコン", kana: "えあこん", romaji: "eakon", en: "air conditioner", si: "වායුසමීකරණය" },
+                    { id: 78, kanji: "電気", kana: "でんき", romaji: "denki", en: "electricity/light", si: "විදුලිය/විදුලි පහන" },
+                    { id: 79, kanji: "照明", kana: "しょうめい", romaji: "shōmei", en: "lighting", si: "ආලෝකය" },
+                    { id: 80, kanji: "Wi-Fi", kana: "わいふぁい", romaji: "waifai", en: "Wi-Fi", si: "Wi-Fi" }
+                ]
+            },
+            {
+                id: 5, name: "05. BATHROOM & AMENITIES", icon: "🚿",
+                words: [
+                    { id: 81, kanji: "浴室", kana: "よくしつ", romaji: "yokushitsu", en: "bathroom", si: "නාන කාමරය" },
+                    { id: 82, kanji: "お風呂", kana: "おふろ", romaji: "ofuro", en: "bath", si: "නාන තටාකය" },
+                    { id: 83, kanji: "シャワー", kana: "しゃわー", romaji: "shawā", en: "shower", si: "shower" },
+                    { id: 84, kanji: "トイレ", kana: "といれ", romaji: "toire", en: "toilet", si: "වැසිකිළිය" },
+                    { id: 85, kanji: "洗面所", kana: "せんめんじょ", romaji: "senmenjo", en: "washroom", si: "මුහුණ/අත් සෝදන ස්ථානය" },
+                    { id: 86, kanji: "洗面台", kana: "せんめんだい", romaji: "senmendai", en: "wash basin", si: "සින්ක් එක" },
+                    { id: 87, kanji: "鏡", kana: "かがみ", romaji: "kagami", en: "mirror", si: "කැඩපත" },
+                    { id: 88, kanji: "シャンプー", kana: "しゃんぷー", romaji: "shanpū", en: "shampoo", si: "ෂැම්පු" },
+                    { id: 89, kanji: "リンス", kana: "りんす", romaji: "rinsu", en: "conditioner", si: "කන්ඩිෂනර්" },
+                    { id: 90, kanji: "石鹸", kana: "せっけん", romaji: "sekken", en: "soap", si: "සබන්" },
+                    { id: 91, kanji: "歯ブラシ", kana: "はぶらし", romaji: "haburashi", en: "toothbrush", si: "දත් බුරුසුව" },
+                    { id: 92, kanji: "歯磨き粉", kana: "はみがきこ", romaji: "hamigakiko", en: "toothpaste", si: "දත් මැදීමේ පේස්ට්" },
+                    { id: 93, kanji: "タオル", kana: "たおる", romaji: "taoru", en: "towel", si: "තෝවාය" },
+                    { id: 94, kanji: "バスタオル", kana: "ばすたおる", romaji: "basu taoru", en: "bath towel", si: "නාන තුවාය" },
+                    { id: 95, kanji: "ドライヤー", kana: "どらいやー", romaji: "doraiyā", en: "hair dryer", si: "හිසකෙස් වියළනය" },
+                    { id: 96, kanji: "アメニティ", kana: "あめにてぃ", romaji: "ameniti", en: "amenities", si: "අමුත්තන් සඳහා පහසුකම්" },
+                    { id: 97, kanji: "トイレットペーパー", kana: "といれっとぺーぱー", romaji: "toiretto pēpā", en: "toilet paper", si: "වැසිකිළි කඩදාසි" },
+                    { id: 98, kanji: "洗剤", kana: "せんざい", romaji: "senzai", en: "detergent", si: "පිරිසිදු කිරීමේ දියර" },
+                    { id: 99, kanji: "シャンプー台", kana: "しゃんぷーだい", romaji: "shanpū-dai", en: "shampoo station", si: "shampoo ස්ථානය" },
+                    { id: 100, kanji: "浴衣", kana: "ゆかた", romaji: "yukata", en: "yukata robe", si: "යුකටා ඇඳුම" }
+                ]
+            },
+            {
+                id: 6, name: "06. HOUSEKEEPING / CLEANING", icon: "🧹",
+                words: [
+                    { id: 101, kanji: "清掃", kana: "せいそう", romaji: "seisō", en: "cleaning", si: "පිරිසිදු කිරීම" },
+                    { id: 102, kanji: "掃除", kana: "そうじ", romaji: "sōji", en: "cleaning", si: "පිරිසිදු කිරීම" },
+                    { id: 103, kanji: "客室清掃", kana: "きゃくしつせいそう", romaji: "kyakushitsu seisō", en: "room cleaning", si: "කාමර පිරිසිදු කිරීම" },
+                    { id: 104, kanji: "清掃員", kana: "せいそういん", romaji: "seisōin", en: "cleaner", si: "පිරිසිදු කිරීමේ සේවකයා" },
+                    { id: 105, kanji: "清掃スタッフ", kana: "せいそうすたっふ", romaji: "seisō sutaffu", en: "cleaning staff", si: "පිරිසිදු කිරීමේ කාර්ය මණ්ඩලය" },
+                    { id: 106, kanji: "掃除機", kana: "そうじき", romaji: "sōjiki", en: "vacuum cleaner", si: "vacuum cleaner" },
+                    { id: 107, kanji: "ほうき", kana: "ほうき", romaji: "hōki", en: "broom", si: "ඉදල" },
+                    { id: 108, kanji: "ちりとり", kana: "ちりとり", romaji: "chiritori", en: "dustpan", si: "කුණු එකතු කරන උපකරණය" },
+                    { id: 109, kanji: "雑巾", kana: "ぞうきん", romaji: "zōkin", en: "cleaning cloth", si: "පිරිසිදු කිරීමේ රෙදි" },
+                    { id: 110, kanji: "ゴミ", kana: "ごみ", romaji: "gomi", en: "garbage", si: "කුණු" },
+                    { id: 111, kanji: "ゴミ箱", kana: "ごみばこ", romaji: "gomibako", en: "garbage bin", si: "කුණු බඳුන" },
+                    { id: 112, kanji: "分別", kana: "ぶんべつ", romaji: "bunbetsu", en: "sorting", si: "වෙන් කිරීම" },
+                    { id: 113, kanji: "洗濯", kana: "せんたく", romaji: "sentaku", en: "laundry", si: "රෙදි සේදීම" },
+                    { id: 114, kanji: "洗濯機", kana: "せんたくき", romaji: "sentakuki", en: "washing machine", si: "රෙදි සෝදන යන්ත්‍රය" },
+                    { id: 115, kanji: "乾燥機", kana: "かんそうき", romaji: "kansōki", en: "dryer", si: "වියළන යන්ත්‍රය" },
+                    { id: 116, kanji: "リネン", kana: "りねん", romaji: "rinen", en: "linen", si: "ඇඳ ඇතිරිලි/linen" },
+                    { id: 117, kanji: "交換", kana: "こうかん", romaji: "kōkan", en: "replacement", si: "මාරු කිරීම" },
+                    { id: 118, kanji: "補充", kana: "ほじゅう", romaji: "hojū", en: "replenishment", si: "නැවත පිරවීම" },
+                    { id: 119, kanji: "汚れ", kana: "よごれ", romaji: "yogore", en: "dirt/stain", si: "අපිරිසිදුකම/පැල්ලම" },
+                    { id: 120, kanji: "清潔", kana: "せいけつ", romaji: "seiketsu", en: "cleanliness", si: "පිරිසිදුකම" }
+                ]
+            },
+            {
+                id: 7, name: "07. LUGGAGE / LOST & FOUND", icon: "🧳",
+                words: [
+                    { id: 121, kanji: "荷物", kana: "にもつ", romaji: "nimotsu", en: "luggage", si: "ගමන් මලු" },
+                    { id: 122, kanji: "手荷物", kana: "てにもつ", romaji: "tenimotsu", en: "hand luggage", si: "අතේ ගෙන යන බඩු" },
+                    { id: 123, kanji: "スーツケース", kana: "すーつけーす", romaji: "sūtsukēsu", en: "suitcase", si: "ගමන් බෑගය" },
+                    { id: 124, kanji: "バッグ", kana: "ばっぐ", romaji: "baggu", en: "bag", si: "බෑගය" },
+                    { id: 125, kanji: "荷物預かり", kana: "にもつあずかり", romaji: "nimotsu azukari", en: "luggage storage", si: "ගමන් මලු තැන්පත් කිරීම" },
+                    { id: 126, kanji: "預かる", kana: "あずかる", romaji: "azukaru", en: "to keep/hold", si: "බාරගන්නවා" },
+                    { id: 127, kanji: "返す", kana: "かえす", romaji: "kaesu", en: "to return", si: "ආපසු දෙනවා" },
+                    { id: 128, kanji: "忘れ物", kana: "わすれもの", romaji: "wasuremono", en: "forgotten item", si: "අමතක කර දමා ගිය භාණ්ඩය" },
+                    { id: 129, kanji: "落とし物", kana: "おとしもの", romaji: "otoshimono", en: "lost/found item", si: "නැතිවූ/වැටුණු භාණ්ඩය" },
+                    { id: 130, kanji: "貴重品", kana: "きちょうひん", romaji: "kichōhin", en: "valuables", si: "වටිනා භාණ්ඩ" },
+                    { id: 131, kanji: "財布", kana: "さいふ", romaji: "saifu", en: "wallet", si: "පසුම්බිය" },
+                    { id: 132, kanji: "携帯電話", kana: "けいたいでんわ", romaji: "keitai denwa", en: "mobile phone", si: "ජංගම දුරකථනය" },
+                    { id: 133, kanji: "傘", kana: "かさ", romaji: "kasa", en: "umbrella", si: "කුඩය" },
+                    { id: 134, kanji: "発見", kana: "はっけん", romaji: "hakken", en: "discovery", si: "සොයාගැනීම" },
+                    { id: 135, kanji: "保管", kana: "ほかん", romaji: "hokan", en: "storage/keeping", si: "ආරක්ෂිතව තබා ගැනීම" }
+                ]
+            },
+            {
+                id: 8, name: "08. PAYMENT / MONEY", icon: "💴",
+                words: [
+                    { id: 136, kanji: "料金", kana: "りょうきん", romaji: "ryōkin", en: "fee/charge", si: "ගාස්තුව" },
+                    { id: 137, kanji: "宿泊料金", kana: "しゅくはくりょうきん", romaji: "shukuhaku ryōkin", en: "accommodation fee", si: "නවාතැන් ගාස්තුව" },
+                    { id: 138, kanji: "支払い", kana: "しはらい", romaji: "shiharai", en: "payment", si: "ගෙවීම" },
+                    { id: 139, kanji: "支払う", kana: "しはらう", romaji: "shiharau", en: "to pay", si: "ගෙවනවා" },
+                    { id: 140, kanji: "現金", kana: "げんきん", romaji: "genkin", en: "cash", si: "මුදල්" },
+                    { id: 141, kanji: "クレジットカード", kana: "くれじっとかーど", romaji: "kurejitto kādo", en: "credit card", si: "ක්‍රෙඩිට් කාඩ්" },
+                    { id: 142, kanji: "電子マネー", kana: "でんしまねー", romaji: "denshi manē", en: "electronic money", si: "ඉලෙක්ට්‍රොනික මුදල්" },
+                    { id: 143, kanji: "領収書", kana: "りょうしゅうしょ", romaji: "ryōshūsho", en: "receipt", si: "රිසිට්පත" },
+                    { id: 144, kanji: "お釣り", kana: "おつり", romaji: "otsuri", en: "change", si: "ඉතිරි මුදල" },
+                    { id: 145, kanji: "金額", kana: "きんがく", romaji: "kingaku", en: "amount", si: "මුදල් ප්‍රමාණය" },
+                    { id: 146, kanji: "税金", kana: "ぜいきん", romaji: "zeikin", en: "tax", si: "බදු" },
+                    { id: 147, kanji: "消費税", kana: "しょうひぜい", romaji: "shōhizei", en: "consumption tax", si: "පරිභෝජන බද්ද" },
+                    { id: 148, kanji: "前払い", kana: "まえばらい", romaji: "maebarai", en: "advance payment", si: "කලින් ගෙවීම" },
+                    { id: 149, kanji: "後払い", kana: "あとばらい", romaji: "ato-barai", en: "payment later", si: "පසුව ගෙවීම" },
+                    { id: 150, kanji: "預かり金", kana: "あずかりきん", romaji: "azukarikin", en: "deposit money", si: "තාවකාලිකව බාරගත් මුදල්" },
+                    { id: 151, kanji: "返金", kana: "へんきん", romaji: "henkin", en: "refund", si: "මුදල් ආපසු ගෙවීම" },
+                    { id: 152, kanji: "割引", kana: "わりびき", romaji: "waribiki", en: "discount", si: "වට්ටම" },
+                    { id: 153, kanji: "追加料金", kana: "ついかりょうきん", romaji: "tsuika ryōkin", en: "additional fee", si: "අමතර ගාස්තුව" },
+                    { id: 154, kanji: "無料", kana: "むりょう", romaji: "muryō", en: "free", si: "නොමිලේ" },
+                    { id: 155, kanji: "合計", kana: "ごうけい", romaji: "gōkei", en: "total", si: "එකතුව" }
+                ]
+            },
+            {
+                id: 9, name: "09. CUSTOMER SERVICE", icon: "💁‍♂️",
+                words: [
+                    { id: 156, kanji: "接客", kana: "せっきゃく", romaji: "sekkyaku", en: "customer service", si: "පාරිභෝගික සේවය" },
+                    { id: 157, kanji: "接客サービス", kana: "せっきゃくさーびす", romaji: "sekkyaku sābisu", en: "customer service", si: "පාරිභෝගික සේවාව" },
+                    { id: 158, kanji: "対応", kana: "たいおう", romaji: "taiō", en: "handling/response", si: "ප්‍රතිචාර දැක්වීම" },
+                    { id: 159, kanji: "電話対応", kana: "でんわたいおう", romaji: "denwa taiō", en: "telephone handling", si: "දුරකථන සේවය" },
+                    { id: 160, kanji: "笑顔", kana: "えがお", romaji: "egao", en: "smile", si: "සිනහව" },
+                    { id: 161, kanji: "挨拶", kana: "あいさつ", romaji: "aisatsu", en: "greeting", si: "ආචාර කිරීම" },
+                    { id: 162, kanji: "丁寧", kana: "ていねい", romaji: "teinei", en: "polite", si: "ආචාරශීලී" },
+                    { id: 163, kanji: "親切", kana: "しんせつ", romaji: "shinsetsu", en: "kind/helpful", si: "කරුණාවන්ත" },
+                    { id: 164, kanji: "案内する", kana: "あんないする", romaji: "annai suru", en: "to guide", si: "මඟ පෙන්වීම" },
+                    { id: 165, kanji: "説明する", kana: "せつめいする", romaji: "setsumei suru", en: "to explain", si: "පැහැදිලි කිරීම" },
+                    { id: 166, kanji: "確認する", kana: "かくにんする", romaji: "kakunin suru", en: "to confirm", si: "තහවුරු කිරීම" },
+                    { id: 167, kanji: "お手伝い", kana: "おてつだい", romaji: "otetsudai", en: "assistance", si: "උපකාරය" },
+                    { id: 168, kanji: "希望", kana: "きぼう", romaji: "kibō", en: "request/preference", si: "ඉල්ලීම/අවශ්‍යතාව" },
+                    { id: 169, kanji: "要望", kana: "ようぼう", romaji: "yōbō", en: "request", si: "ඉල්ලීම" },
+                    { id: 170, kanji: "質問", kana: "しつもん", romaji: "shitsumon", en: "question", si: "ප්‍රශ්නය" }
+                ]
+            },
+            {
+                id: 10, name: "10. GUEST REQUESTS", icon: "🗣️",
+                words: [
+                    { id: 171, kanji: "お願い", kana: "おねがい", romaji: "onegai", en: "request", si: "ඉල්ලීම" },
+                    { id: 172, kanji: "もう一度", kana: "もういちど", romaji: "mō ichido", en: "once again", si: "නැවත වරක්" },
+                    { id: 173, kanji: "ゆっくり", kana: "ゆっくり", romaji: "yukkuri", en: "slowly", si: "සෙමින්" },
+                    { id: 174, kanji: "少し", kana: "すこし", romaji: "sukoshi", en: "a little", si: "ටිකක්" },
+                    { id: 175, kanji: "すぐに", kana: "すぐに", romaji: "sugu ni", en: "immediately", si: "වහාම" },
+                    { id: 176, kanji: "後で", kana: "あとで", romaji: "ato de", en: "later", si: "පසුව" },
+                    { id: 177, kanji: "追加", kana: "ついか", romaji: "tsuika", en: "additional", si: "අමතර" },
+                    { id: 178, kanji: "必要", kana: "ひつよう", romaji: "hitsuyō", en: "necessary", si: "අවශ්‍ය" },
+                    { id: 179, kanji: "不要", kana: "ふよう", romaji: "fuyō", en: "unnecessary", si: "අනවශ්‍ය" },
+                    { id: 180, kanji: "貸す", kana: "かす", romaji: "kasu", en: "to lend", si: "ණයට/තාවකාලිකව දෙනවා" },
+                    { id: 181, kanji: "借りる", kana: "かりる", romaji: "kariru", en: "to borrow", si: "ණයට ගන්නවා" },
+                    { id: 182, kanji: "持ってくる", kana: "もってくる", romaji: "motte kuru", en: "bring", si: "ගෙන එනවා" },
+                    { id: 183, kanji: "持っていく", kana: "もっていく", romaji: "motte iku", en: "take", si: "රැගෙන යනවා" },
+                    { id: 184, kanji: "交換してください", kana: "こうかんしてください", romaji: "kōkan shite kudasai", en: "please replace", si: "කරුණාකර මාරු කරන්න" },
+                    { id: 185, kanji: "お願いできますか", kana: "おねがいできますか", romaji: "onegai dekimasu ka", en: "could you please?", si: "කරුණාකර කළ හැකිද?" }
+                ]
+            },
+            {
+                id: 11, name: "11. COMPLAINTS & TROUBLE", icon: "😠",
+                words: [
+                    { id: 186, kanji: "苦情", kana: "くじょう", romaji: "kujō", en: "complaint", si: "පැමිණිල්ල" },
+                    { id: 187, kanji: "問題", kana: "もんだい", romaji: "mondai", en: "problem", si: "ගැටලුව" },
+                    { id: 188, kanji: "トラブル", kana: "とらぶる", romaji: "toraburu", en: "trouble", si: "ගැටලුව" },
+                    { id: 189, kanji: "故障", kana: "こしょう", romaji: "koshō", en: "breakdown", si: "දෝෂය" },
+                    { id: 190, kanji: "壊れる", kana: "こわれる", romaji: "kowareru", en: "to break", si: "කැඩෙනවා" },
+                    { id: 191, kanji: "騒音", kana: "そうおん", romaji: "sōon", en: "noise", si: "ශබ්දය" },
+                    { id: 192, kanji: "うるさい", kana: "うるさい", romaji: "urusai", en: "noisy", si: "ශබ්ද වැඩියි" },
+                    { id: 193, kanji: "寒い", kana: "さむい", romaji: "samui", en: "cold", si: "සීතලයි" },
+                    { id: 194, kanji: "暑い", kana: "あつい", romaji: "atsui", en: "hot", si: "උණුසුම්" },
+                    { id: 195, kanji: "汚い", kana: "きたない", romaji: "kitanai", en: "dirty", si: "අපිරිසිදු" },
+                    { id: 196, kanji: "臭い", kana: "くさい", romaji: "kusai", en: "smelly", si: "දුර්ගන්ධය" },
+                    { id: 197, kanji: "水漏れ", kana: "みずもれ", romaji: "mizumore", en: "water leak", si: "ජල කාන්දුව" },
+                    { id: 198, kanji: "お湯", kana: "おゆ", romaji: "oyu", en: "hot water", si: "උණු වතුර" },
+                    { id: 199, kanji: "電気がつかない", kana: "でんきがつかない", romaji: "denki ga tsukanai", en: "light doesn't work", si: "විදුලි පහන වැඩ නොකරයි" },
+                    { id: 200, kanji: "エアコンが故障する", kana: "えあこんがこしょうする", romaji: "eakon ga koshō suru", en: "AC breaks", si: "AC එක දෝෂ වීම" },
+                    { id: 201, kanji: "謝る", kana: "あやまる", romaji: "ayamaru", en: "to apologize", si: "සමාව ඉල්ලනවා" },
+                    { id: 202, kanji: "お詫び", kana: "おわび", romaji: "owabi", en: "apology", si: "සමාව ඉල්ලීම" },
+                    { id: 203, kanji: "対処", kana: "たいしょ", romaji: "taisho", en: "handling", si: "විසඳුම් ක්‍රියාමාර්ග" },
+                    { id: 204, kanji: "解決", kana: "かいけつ", romaji: "kaiketsu", en: "solution", si: "විසඳීම" },
+                    { id: 205, kanji: "交換する", kana: "こうかんする", romaji: "kōkan suru", en: "replace", si: "මාරු කරනවා" }
+                ]
+            },
+            {
+                id: 12, name: "12. TELEPHONE", icon: "📞",
+                words: [
+                    { id: 206, kanji: "電話", kana: "でんわ", romaji: "denwa", en: "telephone", si: "දුරකථනය" },
+                    { id: 207, kanji: "電話番号", kana: "でんわばんごう", romaji: "denwa bangō", en: "phone number", si: "දුරකථන අංකය" },
+                    { id: 208, kanji: "電話する", kana: "でんわする", romaji: "denwa suru", en: "to call", si: "දුරකථනයෙන් අමතනවා" },
+                    { id: 209, kanji: "かける", kana: "かける", romaji: "kakeru", en: "to make a call", si: "ඇමතුමක් ගන්නවා" },
+                    { id: 210, kanji: "受ける", kana: "うける", romaji: "ukeru", en: "to receive", si: "ලබාගන්නවා" },
+                    { id: 211, kanji: "留守番電話", kana: "るすばんでんわ", romaji: "rusuban denwa", en: "voicemail", si: "voicemail" },
+                    { id: 212, kanji: "内線", kana: "ないせん", romaji: "naisen", en: "extension", si: "අභ්‍යන්තර දුරකථන අංකය" },
+                    { id: 213, kanji: "外線", kana: "がいせん", romaji: "gaisen", en: "outside line", si: "බාහිර දුරකථන මාර්ගය" },
+                    { id: 214, kanji: "伝言", kana: "でんごん", romaji: "dengon", en: "message", si: "පණිවිඩය" },
+                    { id: 215, kanji: "聞き取る", kana: "ききとる", romaji: "kikitoru", en: "understand by listening", si: "අසා තේරුම් ගැනීම" }
+                ]
+            },
+            {
+                id: 13, name: "13. RESTAURANT / BREAKFAST", icon: "🍳",
+                words: [
+                    { id: 216, kanji: "朝食", kana: "ちょうしょく", romaji: "chōshoku", en: "breakfast", si: "උදෑසන ආහාරය" },
+                    { id: 217, kanji: "昼食", kana: "ちゅうしょく", romaji: "chūshoku", en: "lunch", si: "දිවා ආහාරය" },
+                    { id: 218, kanji: "夕食", kana: "ゆうしょく", romaji: "yūshoku", en: "dinner", si: "රාත්‍රී ආහාරය" },
+                    { id: 219, kanji: "食事", kana: "しょくじ", romaji: "shokuji", en: "meal", si: "ආහාර වේල" },
+                    { id: 220, kanji: "レストラン", kana: "れすとらん", romaji: "resutoran", en: "restaurant", si: "අවන්හල" },
+                    { id: 221, kanji: "朝食会場", kana: "ちょうしょくかいじょう", romaji: "chōshoku kaijō", en: "breakfast venue", si: "උදෑසන ආහාර ස්ථානය" },
+                    { id: 222, kanji: "メニュー", kana: "めにゅー", romaji: "menyū", en: "menu", si: "මෙනුව" },
+                    { id: 223, kanji: "注文", kana: "ちゅうもん", romaji: "chūmon", en: "order", si: "ඇණවුම" },
+                    { id: 224, kanji: "飲み物", kana: "のみもの", romaji: "nomimono", en: "drink", si: "පානය" },
+                    { id: 225, kanji: "食べ物", kana: "たべもの", romaji: "tabemono", en: "food", si: "ආහාර" },
+                    { id: 226, kanji: "水", kana: "みず", romaji: "mizu", en: "water", si: "වතුර" },
+                    { id: 227, kanji: "お茶", kana: "おちゃ", romaji: "ocha", en: "tea", si: "තේ" },
+                    { id: 228, kanji: "コーヒー", kana: "こーひー", romaji: "kōhī", en: "coffee", si: "කෝපි" },
+                    { id: 229, kanji: "箸", kana: "はし", romaji: "hashi", en: "chopsticks", si: "කෑම කූරු" },
+                    { id: 230, kanji: "スプーン", kana: "すぷーん", romaji: "supūn", en: "spoon", si: "හැන්ද" },
+                    { id: 231, kanji: "フォーク", kana: "ふぉーく", romaji: "fōku", en: "fork", si: "ගෑරුප්පුව" },
+                    { id: 232, kanji: "皿", kana: "さら", romaji: "sara", en: "plate", si: "පිඟාන" },
+                    { id: 233, kanji: "食器", kana: "しょっき", romaji: "shokki", en: "tableware", si: "පිඟන් භාණ්ඩ" },
+                    { id: 234, kanji: "アレルギー", kana: "あれるぎー", romaji: "arerugī", en: "allergy", si: "ආසාත්මිකතාව" },
+                    { id: 235, kanji: "禁煙", kana: "きんえん", romaji: "kinen", en: "no smoking", si: "දුම්පානය තහනම්" }
+                ]
+            },
+            {
+                id: 14, name: "14. EMERGENCY & SAFETY", icon: "🚨",
+                words: [
+                    { id: 236, kanji: "緊急", kana: "きんきゅう", romaji: "kinkyū", en: "emergency", si: "හදිසි අවස්ථාව" },
+                    { id: 237, kanji: "非常口", kana: "ひじょうぐち", romaji: "hijōguchi", en: "emergency exit", si: "හදිසි පිටවීම" },
+                    { id: 238, kanji: "非常階段", kana: "ひじょうかいだん", romaji: "hijō kaidan", en: "emergency stairs", si: "හදිසි පඩිපෙළ" },
+                    { id: 239, kanji: "火災", kana: "かさい", romaji: "kasai", en: "fire", si: "ගින්න" },
+                    { id: 240, kanji: "火事", kana: "かじ", romaji: "kaji", en: "fire", si: "ගින්න" },
+                    { id: 241, kanji: "地震", kana: "じしん", romaji: "jishin", en: "earthquake", si: "භූමිකම්පාව" },
+                    { id: 242, kanji: "台風", kana: "たいふう", romaji: "taifū", en: "typhoon", si: "සුළි කුණාටුව" },
+                    { id: 243, kanji: "避難", kana: "ひなん", romaji: "hinan", en: "evacuation", si: "ඉවත් වීම" },
+                    { id: 244, kanji: "避難所", kana: "ひなんじょ", romaji: "hinanjo", en: "evacuation shelter", si: "ආරක්ෂිත රැඳවුම් ස්ථානය" },
+                    { id: 245, kanji: "消防車", kana: "しょうぼうしゃ", romaji: "shōbōsha", en: "fire engine", si: "ගිනි නිවන රථය" },
+                    { id: 246, kanji: "救急車", kana: "きゅうきゅうしゃ", romaji: "kyūkyūsha", en: "ambulance", si: "ගිලන් රථය" },
+                    { id: 247, kanji: "警察", kana: "けいさつ", romaji: "keisatsu", en: "police", si: "පොලිසිය" },
+                    { id: 248, kanji: "消火器", kana: "しょうかき", romaji: "shōkaki", en: "fire extinguisher", si: "ගිනි නිවන උපකරණය" },
+                    { id: 249, kanji: "安全", kana: "あんぜん", romaji: "anzen", en: "safety", si: "ආරක්ෂාව" },
+                    { id: 250, kanji: "危険", kana: "きけん", romaji: "kiken", en: "danger", si: "අනතුර" },
+                    { id: 251, kanji: "注意", kana: "ちゅうい", romaji: "chūi", en: "caution", si: "අවධානය" },
+                    { id: 252, kanji: "防災", kana: "ぼうさい", romaji: "bōsai", en: "disaster prevention", si: "ආපදා වැළැක්වීම" },
+                    { id: 253, kanji: "救助", kana: "きゅうじょ", romaji: "kyūjo", en: "rescue", si: "ගලවා ගැනීම" },
+                    { id: 254, kanji: "事故", kana: "じこ", romaji: "jiko", en: "accident", si: "අනතුර" }
+                ]
+            },
+            {
+                id: 15, name: "15. DIRECTIONS / TRANSPORT", icon: "🗺️",
+                words: [
+                    { id: 255, kanji: "駅", kana: "えき", romaji: "eki", en: "station", si: "දුම්රිය ස්ථානය" },
+                    { id: 256, kanji: "電車", kana: "でんしゃ", romaji: "densha", en: "train", si: "දුම්රිය" },
+                    { id: 257, kanji: "バス", kana: "ばす", romaji: "basu", en: "bus", si: "බස් රථය" },
+                    { id: 258, kanji: "タクシー", kana: "たくしー", romaji: "takushī", en: "taxi", si: "ටැක්සි" },
+                    { id: 259, kanji: "空港", kana: "くうこう", romaji: "kūkō", en: "airport", si: "ගුවන් තොටුපළ" },
+                    { id: 260, kanji: "バス停", kana: "ばすてい", romaji: "basutei", en: "bus stop", si: "බස් නැවතුම" },
+                    { id: 261, kanji: "道", kana: "みち", romaji: "michi", en: "road/way", si: "මාර්ගය" },
+                    { id: 262, kanji: "交差点", kana: "こうさてん", romaji: "kōsaten", en: "intersection", si: "මංසන්ධිය" },
+                    { id: 263, kanji: "信号", kana: "しんごう", romaji: "shingō", en: "traffic light", si: "රථවාහන සංඥාව" },
+                    { id: 264, kanji: "右", kana: "みぎ", romaji: "migi", en: "right", si: "දකුණ" },
+                    { id: 265, kanji: "左", kana: "ひだり", romaji: "hidari", en: "left", si: "වම" },
+                    { id: 266, kanji: "まっすぐ", kana: "まっすぐ", romaji: "massugu", en: "straight", si: "කෙළින්" },
+                    { id: 267, kanji: "近い", kana: "ちかい", romaji: "chikai", en: "near", si: "ළඟ" },
+                    { id: 268, kanji: "遠い", kana: "とおい", romaji: "tōi", en: "far", si: "දුර" },
+                    { id: 269, kanji: "徒歩", kana: "とほ", romaji: "toho", en: "on foot", si: "පයින්" },
+                    { id: 270, kanji: "地図", kana: "ちず", romaji: "chizu", en: "map", si: "සිතියම" }
+                ]
+            },
+            {
+                id: 16, name: "16. STAFF / WORKPLACE", icon: "👥",
+                words: [
+                    { id: 271, kanji: "仕事", kana: "しごと", romaji: "shigoto", en: "work", si: "වැඩ" },
+                    { id: 272, kanji: "業務", kana: "ぎょうむ", romaji: "gyōmu", en: "duties", si: "රාජකාරි" },
+                    { id: 273, kanji: "ホテル業務", kana: "ほてるぎょうむ", romaji: "hoteru gyōmu", en: "hotel operations", si: "හෝටල් මෙහෙයුම්" },
+                    { id: 274, kanji: "担当", kana: "たんとう", romaji: "tantō", en: "person in charge", si: "වගකීම/භාරකාරත්වය" },
+                    { id: 275, kanji: "担当者", kana: "たんとうしゃ", romaji: "tantōsha", en: "person in charge", si: "වගකිවයුතු පුද්ගලයා" },
+                    { id: 276, kanji: "上司", kana: "じょうし", romaji: "jōshi", en: "supervisor/boss", si: "ඉහළ නිලධාරියා" },
+                    { id: 277, kanji: "同僚", kana: "どうりょう", romaji: "dōryō", en: "colleague", si: "සහකාර සේවකයා" },
+                    { id: 278, kanji: "新人", kana: "しんじん", romaji: "shinjin", en: "newcommer", si: "නව සේවකයා" },
+                    { id: 279, kanji: "研修", kana: "けんしゅう", romaji: "kenshū", en: "training", si: "පුහුණුව" },
+                    { id: 280, kanji: "勤務", kana: "きんむ", romaji: "kinmu", en: "duty/work", si: "සේවය" },
+                    { id: 281, kanji: "勤務時間", kana: "きんむじかん", romaji: "kinmu jikan", en: "working hours", si: "සේවා වේලාව" },
+                    { id: 282, kanji: "休憩", kana: "きゅうけい", romaji: "kyūkei", en: "break", si: "විවේකය" },
+                    { id: 283, kanji: "休憩時間", kana: "きゅうけいじかん", romaji: "kyūkei jikan", en: "break time", si: "විවේක වේලාව" },
+                    { id: 284, kanji: "シフト", kana: "しふと", romaji: "shifuto", en: "shift", si: "සේවා මුරය" },
+                    { id: 285, kanji: "夜勤", kana: "やきん", romaji: "yakin", en: "night shift", si: "රාත්‍රී මුරය" },
+                    { id: 286, kanji: "引き継ぎ", kana: "ひきつぎ", romaji: "hikitsugi", en: "handover", si: "රාජකාරි භාරදීම" },
+                    { id: 287, kanji: "報告", kana: "ほうこく", romaji: "hōkoku", en: "report", si: "වාර්තා කිරීම" },
+                    { id: 288, kanji: "連絡", kana: "れんらく", romaji: "renraku", en: "contact", si: "සම්බන්ධ කිරීම" },
+                    { id: 289, kanji: "相談", kana: "そうだん", romaji: "sōdan", en: "consultation", si: "උපදෙස් ලබාගැනීම" },
+                    { id: 290, kanji: "協力", kana: "きょうりょく", romaji: "kyōryoku", en: "cooperation", si: "සහයෝගය" }
+                ]
+            },
+            {
+                id: 17, name: "17. DOCUMENTS / RECORDS", icon: "📋",
+                words: [
+                    { id: 291, kanji: "書類", kana: "しょるい", romaji: "shorui", en: "document", si: "ලේඛනය" },
+                    { id: 292, kanji: "記録", kana: "きろく", romaji: "kiroku", en: "record", si: "වාර්තාව" },
+                    { id: 293, kanji: "報告書", kana: "ほうこくしょ", romaji: "hōkokusho", en: "report", si: "වාර්තාව" },
+                    { id: 294, kanji: "名簿", kana: "めいぼ", romaji: "meibo", en: "register/list", si: "නාම ලේඛනය" },
+                    { id: 295, kanji: "伝票", kana: "でんぴょう", romaji: "denpyō", en: "slip/form", si: "ලේඛන පත්‍රය" },
+                    { id: 296, kanji: "領収書", kana: "りょうしゅうしょ", romaji: "ryōshūsho", en: "receipt", si: "රිසිට්පත" },
+                    { id: 297, kanji: "請求書", kana: "せいきゅうしょ", romaji: "seikyūsho", en: "invoice", si: "ඉන්වොයිසිය" },
+                    { id: 298, kanji: "申込書", kana: "もうしこみしょ", romaji: "mōshikomisho", en: "application form", si: "අයදුම්පත" },
+                    { id: 299, kanji: "記入欄", kana: "きにゅうらん", romaji: "kinyūran", en: "entry field", si: "පිරවිය යුතු කොටස" },
+                    { id: 300, kanji: "個人情報", kana: "こじんじょうほう", romaji: "kojin jōhō", en: "personal info", si: "පුද්ගලික තොරතුරු" }
+                ]
+            },
+            {
+                id: 18, name: "18. HOTEL OPERATIONS", icon: "🧑‍💼",
+                words: [
+                    { id: 301, kanji: "運営", kana: "うんえい", romaji: "un'ei", en: "operation", si: "මෙහෙයුම්" },
+                    { id: 302, kanji: "管理", kana: "かんり", romaji: "kanri", en: "management", si: "කළමනාකරණය" },
+                    { id: 303, kanji: "施設", kana: "しせつ", romaji: "shisetsu", en: "facility", si: "පහසුකම" },
+                    { id: 304, kanji: "設備", kana: "せつび", romaji: "setsubi", en: "equipment", si: "උපකරණ/පහසුකම්" },
+                    { id: 305, kanji: "点検", kana: "てんけん", romaji: "tenken", en: "inspection", si: "පරීක්ෂාව" },
+                    { id: 306, kanji: "修理", kana: "しゅうり", romaji: "shūri", en: "repair", si: "අලුත්වැඩියා කිරීම" },
+                    { id: 307, kanji: "維持", kana: "いじ", romaji: "iji", en: "maintenance", si: "පවත්වාගෙන යාම" },
+                    { id: 308, kanji: "管理する", kana: "かんりする", romaji: "kanri suru", en: "manage", si: "කළමනාකරණය කරනවා" },
+                    { id: 309, kanji: "準備", kana: "じゅんび", romaji: "junbi", en: "preparation", si: "සූදානම" },
+                    { id: 310, kanji: "開店", kana: "かいてん", romaji: "kaiten", en: "opening", si: "විවෘත කිරීම" },
+                    { id: 311, kanji: "閉店", kana: "へいてん", romaji: "heiten", en: "closing", si: "වසා දැමීම" },
+                    { id: 312, kanji: "営業", kana: "えいぎょう", romaji: "eigyō", en: "business operation", si: "ව්‍යාපාර මෙහෙයුම" },
+                    { id: 313, kanji: "営業時間", kana: "えいぎょうじかん", romaji: "eigyō jikan", en: "business hours", si: "සේවා වේලාව" },
+                    { id: 314, kanji: "品質", kana: "ひんしつ", romaji: "hinshitsu", en: "quality", si: "ගුණාත්මකභාවය" },
+                    { id: 315, kanji: "サービス", kana: "さーびす", romaji: "sābisu", en: "service", si: "සේවාව" }
+                ]
+            },
+            {
+                id: 19, name: "19. USEFUL VERBS", icon: "⚡",
+                words: [
+                    { id: 316, kanji: "予約する", kana: "よやくする", romaji: "yoyaku suru", en: "reserve", si: "වෙන් කරනවා" },
+                    { id: 317, kanji: "確認する", kana: "かくにんする", romaji: "kakunin suru", en: "confirm", si: "තහවුරු කරනවා" },
+                    { id: 318, kanji: "案内する", kana: "あんないする", romaji: "annai suru", en: "guide", si: "මඟ පෙන්වනවා" },
+                    { id: 319, kanji: "説明する", kana: "せつめいする", romaji: "setsumei suru", en: "explain", si: "පැහැදිලි කරනවා" },
+                    { id: 320, kanji: "掃除する", kana: "そうじする", romaji: "sōji suru", en: "clean", si: "පිරිසිදු කරනවා" },
+                    { id: 321, kanji: "洗う", kana: "あらう", romaji: "arau", en: "wash", si: "සෝදනවා" },
+                    { id: 322, kanji: "拭く", kana: "ふく", romaji: "fuku", en: "wipe", si: "පිස දමනවා" },
+                    { id: 323, kanji: "交換する", kana: "こうかんする", romaji: "kōkan suru", en: "replace", si: "මාරු කරනවා" },
+                    { id: 324, kanji: "補充する", kana: "ほじゅうする", romaji: "hojū suru", en: "replenish", si: "නැවත පුරවනවා" },
+                    { id: 325, kanji: "支払う", kana: "しはらう", romaji: "shiharau", en: "pay", si: "ගෙවනවා" },
+                    { id: 326, kanji: "受け取る", kana: "うけとる", romaji: "uketoru", en: "receive", si: "ලබාගන්නවා" },
+                    { id: 327, kanji: "渡す", kana: "わたす", romaji: "watasu", en: "hand over", si: "භාර දෙනවා" },
+                    { id: 328, kanji: "預かる", kana: "あずかる", romaji: "azukaru", en: "keep/hold", si: "බාරගන්නවා" },
+                    { id: 329, kanji: "返す", kana: "かえす", romaji: "kaesu", en: "return", si: "ආපසු දෙනවා" },
+                    { id: 330, kanji: "調べる", kana: "しらべる", romaji: "shiraberu", en: "check/investigate", si: "පරීක්ෂා කරනවා" },
+                    { id: 331, kanji: "探す", kana: "さがす", romaji: "sagasu", en: "search", si: "සොයනවා" },
+                    { id: 332, kanji: "呼ぶ", kana: "よぶ", romaji: "yobu", en: "call", si: "කැඳවනවා" },
+                    { id: 333, kanji: "待つ", kana: "まつ", romaji: "matsu", en: "wait", si: "බලා සිටිනවා" },
+                    { id: 334, kanji: "手伝う", kana: "てつだう", romaji: "tetsudau", en: "help", si: "උදව් කරනවා" },
+                    { id: 335, kanji: "伝える", kana: "つたえる", romaji: "tsutaeru", en: "tell/convey", si: "දැනුම් දෙනවා" }
+                ]
+            },
+            {
+                id: 20, name: "20. IMPORTANT HOTEL EXPRESSIONS", icon: "💡",
+                words: [
+                    { id: 336, kanji: "いらっしゃいませ", kana: "いらっしゃいませ", romaji: "irasshaimase", en: "welcome", si: "සාදරයෙන් පිළිගනිමු" },
+                    { id: 337, kanji: "ありがとうございます", kana: "ありがとうございます", romaji: "arigatō gozaimasu", en: "thank you", si: "ස්තුතියි" },
+                    { id: 338, kanji: "ありがとうございました", kana: "ありがとうございました", romaji: "arigatō gozaimashita", en: "thank you very much", si: "බොහොම ස්තුතියි" },
+                    { id: 339, kanji: "少々お待ちください", kana: "しょうしょうおまちください", romaji: "shōshō omachi kudasai", en: "please wait a moment", si: "කරුණාකර මොහොතක් රැඳී සිටින්න" },
+                    { id: 340, kanji: "お待たせしました", kana: "おまたせしました", romaji: "omatase shimashita", en: "sorry to keep you waiting", si: "බලා සිටීමට සිදු වූවාට සමාවන්න" },
+                    { id: 341, kanji: "かしこまりました", kana: "かしこまりました", romaji: "kashikomarimashita", en: "certainly", si: "හරි, අවබෝධ වුණා" },
+                    { id: 342, kanji: "承知しました", kana: "しょうちしました", romaji: "shōchi shimashita", en: "understood", si: "අවබෝධ වුණා" },
+                    { id: 343, kanji: "申し訳ございません", kana: "もうしわけございません", romaji: "mōshiwake gozaimasen", en: "I sincerely apologize", si: "ඉතාමත් සමාවන්න" },
+                    { id: 344, kanji: "失礼いたします", kana: "しつれいいたします", romaji: "shitsurei itashimasu", en: "excuse me", si: "සමාවන්න/අවසරයි" },
+                    { id: 345, kanji: "こちらへどうぞ", kana: "こちらへどうぞ", romaji: "kochira e dōzo", en: "this way please", si: "මේ පැත්තට එන්න" },
+                    { id: 346, kanji: "お名前をお願いします", kana: "おなまえをおねがいします", romaji: "onamae o onegai shimasu", en: "your name please", si: "ඔබගේ නම කියන්න" },
+                    { id: 347, kanji: "ご予約はございますか", kana: "ごよやくはございますか", romaji: "goyoyaku wa gozaimasu ka", en: "do you have a reservation?", si: "ඔබට වෙන්කිරීමක් තිබේද?" },
+                    { id: 348, kanji: "パスポートをお願いします", kana: "ぱすぽーとをおねがいします", romaji: "pasupōto o onegai shimasu", en: "passport please", si: "කරුණාකර passport එක දෙන්න" },
+                    { id: 349, kanji: "お部屋はこちらです", kana: "おへやはこちらです", romaji: "oheya wa kochira desu", en: "your room is here", si: "ඔබගේ කාමරය මෙතනයි" },
+                    { id: 350, kanji: "ごゆっくりお過ごしください", kana: "ごゆっくりおすごしください", romaji: "goyukkuri osugoshi kudasai", en: "enjoy your stay", si: "සුවපහසු ලෙස නවාතැන් ගත කරන්න" },
+                    { id: 351, kanji: "何かございましたらお知らせください", kana: "なにかございましたらおしらせください", romaji: "nanika gozaimashitara oshirase kudasai", en: "let us know if needed", si: "යම් අවශ්‍යතාවක් තිබේ නම් දැනුම් දෙන්න" },
+                    { id: 352, kanji: "お気をつけてお帰りください", kana: "おきをつけておかえりください", romaji: "oki o tsukete okaeri kudasai", en: "have a safe trip home", si: "පරිස්සමින් ආපසු යන්න" },
+                    { id: 353, kanji: "またお越しくださいませ", kana: "またおこしくださいませ", romaji: "mata okoshi kudasaimase", en: "please visit again", si: "නැවත පැමිණෙන්න" },
+                    { id: 354, kanji: "ご予約を確認いたします", kana: "ごよやくをかくにんいたします", romaji: "goyoyaku o kakunin itashimasu", en: "confirming reservation", si: "ඔබගේ වෙන්කිරීම පරීක්ෂා කරන්නම්" },
+                    { id: 355, kanji: "お支払いをお願いします", kana: "おしはらいをおねがいします", romaji: "oshiharai o onegai shimasu", en: "payment please", si: "කරුණාකර ගෙවීම කරන්න" },
+                    { id: 356, kanji: "領収書はこちらです", kana: "りょうしゅうしょはこちらです", romaji: "ryōshūsho wa kochira desu", en: "here is your receipt", si: "මෙන්න ඔබගේ රිසිට්පත" },
+                    { id: 357, kanji: "お部屋を確認いたします", kana: "おへやをかくにんいたします", romaji: "oheya o kakunin itashimasu", en: "will check room", si: "මම කාමරය පරීක්ෂා කරන්නම්" },
+                    { id: 358, kanji: "ただいま確認いたします", kana: "ただいまかくにんいたします", romaji: "tadaima kakunin itashimasu", en: "will check now", si: "දැන්ම පරීක්ෂා කරන්නම්" },
+                    { id: 359, kanji: "担当者をお呼びします", kana: "たんとうしゃをおよびします", romaji: "tantōsha o oyobi shimasu", en: "calling person in charge", si: "වගකිවයුතු පුද්ගලයා කැඳවන්නම්" },
+                    { id: 360, kanji: "少々お待ちいただけますか", kana: "しょうしょうおまちいただけますか", romaji: "shōshō omachi itadakemasu ka", en: "could you please wait?", si: "කරුණාකර ටික වේලාවක් රැඳී සිටිය හැකිද?" }
+                ]
+            }
+        ];
+
+        const nativeConversations = [
+            {
+                title: "Scenario: Front Desk Check-in Dialogue",
+                dialogue: [
+                    { speaker: "Staff", jp: "いらっしゃいませ。本日チェックインのご予約のお客さまでいらっしゃいますか。", en: "Welcome! Are you arriving for check-in today?", si: "සාදරයෙන් පිළිගනිමු! ඔබ අද දිනයේ වෙන්කරවාගත් අමුත්තාද?" },
+                    { speaker: "Guest", jp: "はい、スリランカから来ましたタリンダです。", en: "Yes, I am Tharinda from Sri Lanka.", si: "ඔව්, මම ශ්‍රී ලංකාවේ සිට පැමිණි තලින්ද." },
+                    { speaker: "Staff", jp: "タリンダ様、お待ちしておりました。パスポートのご提示をお願いいたします。", en: "Mr. Tharinda, we've been expecting you. May I please see your passport?", si: "තලින්ද මහත්මයා, අප ඔබ එනතුරු බලා සිටියා. කරුණාකර ඔබගේ විදේශ ගමන් බලපත්‍රය පෙන්විය හැකිද?" }
+                ]
+            }
+        ];
+
+        // STATE MANAGEMENT WITH LOCAL STORAGE & WEAKNESS MEMORY
+        let doneQA = JSON.parse(localStorage.getItem('ssw_done_qa') || '[]');
+        let starQA = JSON.parse(localStorage.getItem('ssw_star_qa') || '[]');
+        let masteredVocab = JSON.parse(localStorage.getItem('ssw_mastered_vocab') || '[]');
+        let userXP = parseInt(localStorage.getItem('ssw_user_xp') || '0');
+        let currentTheme = localStorage.getItem('ssw_theme') || 'dark';
+        let senseiWeaknesses = JSON.parse(localStorage.getItem('ssw_sensei_weaknesses') || '[]');
+
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        function saveState() {
+            localStorage.setItem('ssw_done_qa', JSON.stringify(doneQA));
+            localStorage.setItem('ssw_star_qa', JSON.stringify(starQA));
+            localStorage.setItem('ssw_mastered_vocab', JSON.stringify(masteredVocab));
+            localStorage.setItem('ssw_user_xp', userXP.toString());
+            localStorage.setItem('ssw_theme', currentTheme);
+            localStorage.setItem('ssw_sensei_weaknesses', JSON.stringify(senseiWeaknesses));
+            updateStats();
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            saveState();
+        }
+
+        function toggleDone(id) {
+            if(doneQA.includes(id)) doneQA = doneQA.filter(i => i !== id);
+            else doneQA.push(id);
+            saveState(); renderQA();
+        }
+
+        function toggleStar(id) {
+            if(starQA.includes(id)) starQA = starQA.filter(i => i !== id);
+            else starQA.push(id);
+            saveState(); renderQA();
+        }
+
+        function toggleVocabMastered(wordId) {
+            if(masteredVocab.includes(wordId)) {
+                masteredVocab = masteredVocab.filter(i => i !== wordId);
+            } else {
+                masteredVocab.push(wordId);
+                userXP += 5;
+            }
+            saveState();
+            renderVocabCategories();
+            if(activeCategoryId) renderVocabCards(activeCategoryId);
+        }
+
+        function updateStats() {
+            document.getElementById('doneQA').innerText = `${doneQA.length}/69`;
+            document.getElementById('starQA').innerText = starQA.length;
+            document.getElementById('progressPct').innerText = `${Math.round((doneQA.length / 69) * 100)}%`;
+            document.getElementById('vocabMasteredCount').innerText = `${masteredVocab.length}/360`;
+            document.getElementById('xpVal').innerText = userXP;
+
+            let levelTitle = "研修生 (Trainee)";
+            let nextXp = 100;
+            let fillPct = (userXP / 100) * 100;
+
+            if (userXP >= 600) {
+                levelTitle = "おもてなし達人 (Master)"; nextXp = 1000; fillPct = 100;
+            } else if (userXP >= 300) {
+                levelTitle = "主任 (Supervisor)"; nextXp = 600; fillPct = ((userXP - 300) / 300) * 100;
+            } else if (userXP >= 100) {
+                levelTitle = "フロント係 (Staff)"; nextXp = 300; fillPct = ((userXP - 100) / 200) * 100;
+            }
+
+            document.getElementById('levelTitle').innerText = levelTitle;
+            document.getElementById('nextXpVal').innerText = nextXp;
+            document.getElementById('xpBarFill').style.width = `${Math.min(100, fillPct)}%`;
+        }
+
+        // RESET WITH PASSWORD
+        function openSettings() { document.getElementById('settingsModal').classList.remove('hidden'); }
+        function closeSettings() { document.getElementById('settingsModal').classList.add('hidden'); }
+
+        function promptResetData() {
+            const pwd = prompt("Enter PIN Password to Reset All Data:");
+            if (pwd === "1234") {
+                localStorage.clear();
+                doneQA = []; starQA = []; masteredVocab = []; userXP = 0; senseiWeaknesses = [];
+                saveState();
+                renderQA();
+                renderVocabCategories();
+                alert("All progress and data have been reset successfully!");
+                closeSettings();
+            } else if (pwd !== null) {
+                alert("Incorrect Password! Data was NOT reset.");
+            }
+        }
+
+        // RENDER CHAPTERS & QA
+        function renderChapters() {
+            const container = document.getElementById('chaptersContainer');
+            container.innerHTML = '';
+            chaptersData.forEach(ch => {
+                const card = document.createElement('div');
+                card.className = 'content-card';
+                let html = `<h3 style="color:var(--si-color); margin-bottom:10px;">${ch.title}</h3>`;
+                if(ch.content) {
+                    ch.content.forEach(item => {
+                        html += `<div class="trilingual-block">
+                            <div class="lang-text jp"><span class="badge badge-jp">JP</span>${item.jp}</div>
+                            <div class="lang-text en"><span class="badge badge-en">EN</span>${item.en}</div>
+                            <div class="lang-text si"><span class="badge badge-si">SI</span>${item.si}</div>
+                        </div>`;
+                    });
+                }
+                if(ch.subgroups) {
+                    ch.subgroups.forEach(sub => {
+                        html += `<div style="font-size:0.85rem; font-weight:700; color:var(--text-title); margin:8px 0 4px 0;">${sub.title}</div>`;
+                        sub.items.forEach(item => {
+                            html += `<div class="trilingual-block">
+                                <div class="lang-text jp"><span class="badge badge-jp">JP</span>${item.jp}</div>
+                                <div class="lang-text en"><span class="badge badge-en">EN</span>${item.en}</div>
+                                <div class="lang-text si"><span class="badge badge-si">SI</span>${item.si}</div>
+                            </div>`;
+                        });
+                    });
+                }
+                card.innerHTML = html;
+                container.appendChild(card);
+            });
+        }
+
+        function renderQA() {
+            const container = document.getElementById('qaContainer');
+            container.innerHTML = '';
+            qaData.forEach(q => {
+                const isDone = doneQA.includes(q.id);
+                const isStarred = starQA.includes(q.id);
+                const card = document.createElement('div');
+                card.className = 'content-card';
+                card.innerHTML = `
+                    <div class="qa-header">
+                        <span class="qa-num">Q${q.id}</span>
+                        <div>
+                            <button class="action-btn ${isDone ? 'done' : ''}" onclick="toggleDone(${q.id})">✓ Done</button>
+                            <button class="action-btn ${isStarred ? 'star' : ''}" onclick="toggleStar(${q.id})">⭐ Star</button>
+                        </div>
+                    </div>
+                    <div class="lang-text jp"><span class="badge badge-jp">JP</span>${q.q_jp}</div>
+                    <div class="lang-text en"><span class="badge badge-en">EN</span>${q.q_en}</div>
+                    <div class="lang-text si"><span class="badge badge-si">SI</span>${q.q_si}</div>
+                    <div style="margin-top:8px; padding-top:8px; border-top:1px dashed var(--border-soft);">
+                        <div class="lang-text jp"><span class="badge badge-jp">Ans</span>${q.a_jp}</div>
+                        <div class="lang-text en"><span class="badge badge-en">Ans</span>${q.a_en}</div>
+                        <div class="lang-text si"><span class="badge badge-si">Ans</span>${q.a_si}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // VOCAB TILES & CARDS RENDER
+        let activeCategoryId = null;
+
+        function renderVocabCategories() {
+            const dashTiles = document.getElementById('dashTilesPreview');
+            const mainTiles = document.getElementById('vocabCategoriesTiles');
+            const senseiSubTiles = document.getElementById('senseiVocabSubTilesContainer');
+            
+            if(dashTiles) dashTiles.innerHTML = '';
+            if(mainTiles) mainTiles.innerHTML = '';
+            if(senseiSubTiles) senseiSubTiles.innerHTML = '';
+
+            vocabCategoriesData.forEach((cat, idx) => {
+                const tile = document.createElement('div');
+                tile.className = 'tile-card';
+                tile.onclick = () => openVocabCards(cat.id);
+
+                const masteredInCat = cat.words.filter(w => masteredVocab.includes(w.id)).length;
+
+                tile.innerHTML = `
+                    <div class="tile-header">
+                        <span class="tile-icon" style="font-size:1.2rem;">${cat.icon}</span>
+                        <span class="tile-count">${masteredInCat}/${cat.words.length}</span>
+                    </div>
+                    <div class="tile-title">${cat.name}</div>
+                `;
+
+                if(mainTiles) mainTiles.appendChild(tile);
+                
+                if(idx < 4 && dashTiles) {
+                    const dashTile = tile.cloneNode(true);
+                    dashTile.onclick = () => { switchTab('vocab'); openVocabCards(cat.id); };
+                    dashTiles.appendChild(dashTile);
+                }
+
+                // Sensei Sub-Tiles for Vocab Mode
+                if(senseiSubTiles) {
+                    const senseiSubTile = document.createElement('div');
+                    senseiSubTile.className = 'tile-card';
+                    senseiSubTile.style.minHeight = '65px';
+                    senseiSubTile.onclick = () => selectSenseiVocabCategory(cat.id, senseiSubTile);
+                    senseiSubTile.innerHTML = `
+                        <div class="tile-header" style="margin-bottom:2px;">
+                            <span class="tile-icon" style="font-size:1rem;">${cat.icon}</span>
+                        </div>
+                        <div class="tile-title" style="font-size:0.7rem;">${cat.name}</div>
+                    `;
+                    senseiSubTiles.appendChild(senseiSubTile);
+                }
+            });
+        }
+
+        function openVocabCards(catId) {
+            activeCategoryId = catId;
+            document.getElementById('vocabCategoriesView').classList.add('hidden');
+            document.getElementById('vocabPracticeCardsView').classList.remove('hidden');
+            renderVocabCards(catId);
+        }
+
+        function backToCategories() {
+            activeCategoryId = null;
+            document.getElementById('vocabPracticeCardsView').classList.add('hidden');
+            document.getElementById('vocabCategoriesView').classList.remove('hidden');
+            renderVocabCategories();
+        }
+
+        function renderVocabCards(catId) {
+            const cat = vocabCategoriesData.find(c => c.id === catId);
+            if(!cat) return;
+
+            document.getElementById('selectedCategoryTitle').innerText = `${cat.icon} ${cat.name}`;
+            const container = document.getElementById('vocabCardsContainer');
+            container.innerHTML = '';
+
+            cat.words.forEach(w => {
+                const isMastered = masteredVocab.includes(w.id);
+                const card = document.createElement('div');
+                card.className = 'vocab-word-card';
+                card.innerHTML = `
+                    <div class="vocab-jp-row">
+                        <span class="vocab-kanji">${w.kanji}</span>
+                        <span class="vocab-kana">${w.kana}</span>
+                    </div>
+                    <div class="vocab-romaji">${w.romaji}</div>
+                    <div class="vocab-meanings">
+                        <span style="color:var(--en-color);"><span class="badge badge-en">EN</span>${w.en}</span>
+                        <span style="color:var(--si-color);"><span class="badge badge-si">SI</span>${w.si}</span>
+                    </div>
+                    <button class="action-btn ${isMastered ? 'done' : ''}" style="align-self:flex-end; margin-top:4px;" onclick="toggleVocabMastered(${w.id})">
+                        ${isMastered ? '✓ Mastered' : '+ Mark Learned'}
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderConv() {
+            const container = document.getElementById('convContainer');
+            container.innerHTML = '';
+            nativeConversations.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'content-card';
+                let html = `<h4 style="color:var(--si-color); margin-bottom:8px;">${c.title}</h4>`;
+                c.dialogue.forEach(d => {
+                    html += `
+                        <div style="font-size:0.78rem; font-weight:700; color:var(--accent-purple); margin-top:6px;">${d.speaker}</div>
+                        <div class="trilingual-block">
+                            <div class="lang-text jp">${d.jp}</div>
+                            <div class="lang-text en">${d.en}</div>
+                            <div class="lang-text si">${d.si}</div>
+                        </div>
+                    `;
+                });
+                card.innerHTML = html;
+                container.appendChild(card);
+            });
+        }
+
+        // TAB SWITCHER
+        function switchTab(tabId, btn) {
+            if(btn) {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+            ['dash', 'chapters', 'qa', 'vocab', 'conv', 'ai'].forEach(s => {
+                document.getElementById(s + 'Screen').classList.add('hidden');
+            });
+            document.getElementById(tabId + 'Screen').classList.remove('hidden');
+
+            if(tabId === 'vocab') backToCategories();
+            if(tabId === 'ai') generateSenseiQuestion();
+        }
+
+        // GLOBAL SEARCH
+        function globalSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if(!query) { renderQA(); return; }
+            switchTab('qa');
+            const filtered = qaData.filter(q => 
+                q.q_jp.toLowerCase().includes(query) ||
+                q.q_en.toLowerCase().includes(query) ||
+                q.q_si.toLowerCase().includes(query) ||
+                q.a_jp.toLowerCase().includes(query) ||
+                q.a_en.toLowerCase().includes(query) ||
+                q.a_si.toLowerCase().includes(query)
+            );
+            const container = document.getElementById('qaContainer');
+            container.innerHTML = '';
+            filtered.forEach(q => {
+                const card = document.createElement('div');
+                card.className = 'content-card';
+                card.innerHTML = `
+                    <div class="qa-header"><span class="qa-num">Q${q.id}</span></div>
+                    <div class="lang-text jp"><span class="badge badge-jp">JP</span>${q.q_jp}</div>
+                    <div class="lang-text si"><span class="badge badge-si">SI</span>${q.q_si}</div>
+                    <div class="lang-text jp" style="margin-top:6px;"><span class="badge badge-jp">Ans</span>${q.a_jp}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // AI HOTEL SENSEI LOGIC (6 MODES + CATEGORY TILES + ADAPTIVE WEAKNESS + SUGGESTED HINT)
+        let currentSenseiMode = 'customer';
+        let activeSenseiVocabCatId = 1;
+        let currentQuestionObj = null;
+
+        const senseiScenarios = {
+            customer: [
+                { q_jp: "いらっしゃいませ。本日ご予約のお客様でいらっしゃいますか。", q_en: "Welcome! Are you arriving for check-in today?", q_si: "සාදරයෙන් පිළිගනිමු! ඔබ අද දිනයේ වෙන්කරවාගත් අමුත්තාද?", ans_jp: "はい、予約したスリランカのタリンダです。", ans_en: "Yes, I am Tharinda from Sri Lanka who booked.", ans_si: "ඔව්, මම වෙන් කරවා ගත් ශ්‍රී ලංකාවේ තලින්ද." },
+                { q_jp: "チェックアウトをお願いします。鍵を返却いたします。", q_en: "I'd like to check out. Returning the room key.", q_si: "කාමරයෙන් Check-out වීමට අවශ්‍යයි. යතුර භාරදෙමි.", ans_jp: "ご利用ありがとうございました。お会計を確認いたします。", ans_en: "Thank you for staying. I will confirm your bill.", ans_si: "නවාතැන් ගැනීම ගැන ස්තූතියි. ගෙවීම් පරීක්ෂා කරන්නම්." }
+            ],
+            manager: [
+                { q_jp: "本日の朝食会場の準備は整っていますか。", q_en: "Is the breakfast venue preparation ready today?", q_si: "අද උදෑසන ආහාර ස්ථානයේ සූදානම අවසන්ද?", ans_jp: "はい、テーブルと料理の準備はすべて完了しております。", ans_en: "Yes, table and food prep are all complete.", ans_si: "ඔව්, මේස සහ ආහාර සියල්ල සූදානම්." }
+            ],
+            coworker: [
+                { q_jp: "次のシフトへの引き継ぎ（ほうれんそう）事項はありますか。", q_en: "Are there handover (Horenso) items for the next shift?", q_si: "ඊළඟ සේවා මුරයට භාරදීමට යම් වාර්තාවක් තිබේද?", ans_jp: "はい、502号室のお客様から毛布の追加要望がございました。", ans_en: "Yes, room 502 requested an extra blanket.", ans_si: "ඔව්, 502 කාමරයේ අමුත්තා අමතර පොරවනයක් ඉල්ලා සිටියා." }
+            ],
+            phone: [
+                { q_jp: "お電話ありがとうございます。○○ホテルでございます。", q_en: "Thank you for calling. This is OO Hotel.", q_si: "දුරකථන ඇමතුමට ස්තූතියි. මෙය OO හෝටලයයි.", ans_jp: "恐れ入りますが、明日の空室状況を確認していただけますか。", ans_en: "Could you please check tomorrow's room availability?", ans_si: "කරුණාකර හෙට දිනයේ කාමර තිබේදැයි පරීක්ෂා කළ හැකිද?" }
+            ],
+            emergency: [
+                { q_jp: "緊急事態です！地震が発生しました。どう対応しますか。", q_en: "Emergency! An earthquake occurred. How to respond?", q_si: "හදිසි අවස්ථාවක්! භූමිකම්පාවක් ඇතිවිය. කුමක් කරන්නේද?", ans_jp: "お客様の安全を確保し、机の下へ案内します！エレベーターは禁止です！", ans_en: "Ensure guest safety, guide under tables! No elevators!", ans_si: "පාරිභෝගික ආරක්ෂාව තහවුරු කර මේස යටට යොමු කරන්න! විදුලි පඩිපෙළ තහනම්!" }
+            ]
+        };
+
+        function setSenseiMode(mode, element) {
+            currentSenseiMode = mode;
+            document.querySelectorAll('.sensei-tile-card').forEach(b => b.classList.remove('active'));
+            if(element) element.classList.add('active');
+
+            const subTilesEl = document.getElementById('senseiVocabSubTilesContainer');
+            if(mode === 'vocab') {
+                subTilesEl.classList.remove('hidden');
+            } else {
+                subTilesEl.classList.add('hidden');
+            }
+            generateSenseiQuestion();
+        }
+
+        function selectSenseiVocabCategory(catId, element) {
+            activeSenseiVocabCatId = catId;
+            document.querySelectorAll('#senseiVocabSubTilesContainer .tile-card').forEach(b => b.classList.remove('active'));
+            if(element) element.classList.add('active');
+            generateSenseiQuestion();
+        }
+
+        function generateSenseiQuestion() {
+            document.getElementById('suggestedAnswerBox').classList.add('hidden');
+
+            if(currentSenseiMode === 'vocab') {
+                const cat = vocabCategoriesData.find(c => c.id === activeSenseiVocabCatId) || vocabCategoriesData[0];
+                const randomWord = cat.words[Math.floor(Math.random() * cat.words.length)];
+                currentQuestionObj = {
+                    q_jp: `「${randomWord.kanji} (${randomWord.kana})」の意味とホテルの使い方を教えてください。`,
+                    q_en: `What is the meaning and hotel usage of '${randomWord.kanji}' (${randomWord.en})?`,
+                    q_si: `'${randomWord.kanji}' (${randomWord.si}) හි තේරුම සහ භාවිතය කුමක්ද?`,
+                    ans_jp: `${randomWord.kanji}は「${randomWord.si}」という意味です。`,
+                    ans_en: `${randomWord.kanji} means '${randomWord.en}'.`,
+                    ans_si: `${randomWord.kanji} යනු '${randomWord.si}' යන්නයි.`
+                };
+            } else {
+                const scenarioList = senseiScenarios[currentSenseiMode] || senseiScenarios.customer;
+                currentQuestionObj = scenarioList[Math.floor(Math.random() * scenarioList.length)];
+            }
+
+            document.getElementById('aiQuestionText').innerHTML = `
+                <div style="font-size:0.9rem; font-weight:700; color:var(--jp-color); margin-bottom:4px;">${currentQuestionObj.q_jp}</div>
+                <div style="font-size:0.75rem; color:var(--en-color);">${currentQuestionObj.q_en}</div>
+                <div style="font-size:0.75rem; color:var(--si-color);">${currentQuestionObj.q_si}</div>
+            `;
+
+            document.getElementById('suggestJp').innerText = currentQuestionObj.ans_jp;
+            document.getElementById('suggestEn').innerText = currentQuestionObj.ans_en;
+            document.getElementById('suggestSi').innerText = currentQuestionObj.ans_si;
+
+            speakJapaneseVoice(currentQuestionObj.q_jp);
+        }
+
+        function toggleSuggestedAnswer() {
+            document.getElementById('suggestedAnswerBox').classList.toggle('hidden');
+        }
+
+        function submitSenseiAnswer() {
+            const input = document.getElementById('senseiTextInput');
+            const val = input.value.trim();
+            if(!val) return;
+
+            document.getElementById('transcriptBox').innerHTML += `
+                <div style="color:var(--en-color); font-weight:700; margin-top:8px;">You Answered:</div>
+                ${val}
+            `;
+
+            input.value = '';
+            userXP += 10;
+            saveState();
+
+            setTimeout(() => {
+                document.getElementById('transcriptBox').innerHTML += `
+                    <div style="color:var(--accent-green); font-weight:700; margin-top:8px;">AI Sensei Feedback:</div>
+                    素晴らしいですね！(+10 XP) 正しいおもてなし対応です。(Great response! Proper Keigo hospitality.)
+                `;
+                speakJapaneseVoice("素晴らしいですね！正しい対応です。");
+            }, 500);
+        }
+
+        // LIVE VOICE (STT & TTS)
+        let isListening = false;
+        let recognition = null;
+
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'ja-JP';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                isListening = true;
+                document.getElementById('micBtn').classList.add('listening');
+                document.getElementById('pulseRing').classList.add('active');
+                document.getElementById('callStatus').innerText = "Listening in Japanese... (話し手を聴いています)";
+            };
+
+            recognition.onresult = (event) => {
+                const userSpeech = event.results[0][0].transcript;
+                document.getElementById('senseiTextInput').value = userSpeech;
+                submitSenseiAnswer();
+            };
+
+            recognition.onerror = () => { stopLiveVoice(); };
+            recognition.onend = () => { stopLiveVoice(); };
+        }
+
+        function toggleVoiceLive() {
+            if(!recognition) { alert("Speech recognition is not supported in this browser. Please use Chrome."); return; }
+            if(isListening) { recognition.stop(); stopLiveVoice(); }
+            else { recognition.start(); }
+        }
+
+        function stopLiveVoice() {
+            isListening = false;
+            document.getElementById('micBtn').classList.remove('listening');
+            document.getElementById('pulseRing').classList.remove('active');
+            document.getElementById('callStatus').innerText = "AI Sensei Live Call Ready";
+        }
+
+        function speakJapaneseVoice(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.88;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // INIT APP
+        renderChapters();
+        renderQA();
+        renderVocabCategories();
+        renderConv();
+        updateStats();
+    </script>
+</body>
+</html>
